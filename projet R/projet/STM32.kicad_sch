@@ -4849,7 +4849,7 @@
 				)
 			)
 		)
-		(property "Value" "100"
+		(property "Value" "1k6"
 			(at 220.98 52.07 90)
 			(effects
 				(font
@@ -6753,7 +6753,7 @@
 				)
 			)
 		)
-		(property "Value" "100"
+		(property "Value" "1k6"
 			(at 220.98 27.94 90)
 			(effects
 				(font
@@ -7176,7 +7176,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_01005_0402Metric"
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
 			(at 54.61 64.77 0)
 			(effects
 				(font
@@ -7236,7 +7236,7 @@
 				)
 			)
 		)
-		(property "Value" "100"
+		(property "Value" "1k6"
 			(at 220.98 39.37 90)
 			(effects
 				(font
