@@ -2244,16 +2244,6 @@
 	)
 	(wire
 		(pts
-			(xy 36.83 40.64) (xy 36.83 41.91)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "0e238a5c-3911-4307-9785-d11bf74149ca")
-	)
-	(wire
-		(pts
 			(xy 33.02 82.55) (xy 38.1 82.55)
 		)
 		(stroke
@@ -2491,6 +2481,16 @@
 			(type default)
 		)
 		(uuid "83f58038-d18c-4039-b2c5-10a8a3207c53")
+	)
+	(wire
+		(pts
+			(xy 48.26 48.26) (xy 57.15 48.26)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8693d4a2-1296-4018-94b0-022e2702732e")
 	)
 	(wire
 		(pts
@@ -2784,6 +2784,16 @@
 	)
 	(wire
 		(pts
+			(xy 48.26 43.18) (xy 48.26 45.72)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f7288908-a0d4-41ee-9fe7-7f76b3109fae")
+	)
+	(wire
+		(pts
 			(xy 67.31 45.72) (xy 69.85 45.72)
 		)
 		(stroke
@@ -2791,50 +2801,6 @@
 			(type default)
 		)
 		(uuid "f7b9dd9e-e122-41a6-b1b1-94676676e405")
-	)
-	(global_label "+7.2V"
-		(shape input)
-		(at 57.15 48.26 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "4bbe7074-ba6b-47f9-a1da-e557b69782b5")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 48.48 48.26 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-				(hide yes)
-			)
-		)
-	)
-	(global_label "+7.2V"
-		(shape input)
-		(at 36.83 38.1 180)
-		(fields_autoplaced yes)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify right)
-		)
-		(uuid "b0d02c92-9b76-451d-9273-e9e00f99ccb5")
-		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 28.16 38.1 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-				(hide yes)
-			)
-		)
 	)
 	(symbol
 		(lib_id "Device:LED")
@@ -2846,7 +2812,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "0ea21797-b0c6-45d5-82fd-2b442e0fe278")
-		(property "Reference" "D3_PWR_3V"
+		(property "Reference" "D3_PWR_3V1"
 			(at 43.4975 86.36 0)
 			(effects
 				(font
@@ -2862,7 +2828,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "LED_SMD:LED_0603_1608Metric"
 			(at 41.91 93.98 0)
 			(effects
 				(font
@@ -2907,7 +2873,7 @@
 		(instances
 			(project ""
 				(path "/b2330267-3262-4d12-877e-36612b3f2d84/027c0f16-9d10-4b80-857c-f21dafef43b8"
-					(reference "D3_PWR_3V")
+					(reference "D3_PWR_3V1")
 					(unit 1)
 				)
 			)
@@ -3012,7 +2978,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
 			(at 115.57 64.77 0)
 			(effects
 				(font
@@ -3148,7 +3114,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_01005_0402Metric"
 			(at 91.44 62.23 0)
 			(effects
 				(font
@@ -3208,7 +3174,7 @@
 				)
 			)
 		)
-		(property "Value" "1k"
+		(property "Value" "240"
 			(at 53.34 71.12 90)
 			(effects
 				(font
@@ -3216,7 +3182,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
 			(at 53.34 73.66 0)
 			(effects
 				(font
@@ -3284,7 +3250,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
 			(at 171.45 74.93 0)
 			(effects
 				(font
@@ -3354,7 +3320,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "TestPoint:TestPoint_Pad_D1.0mm"
 			(at 273.05 59.69 0)
 			(effects
 				(font
@@ -3533,7 +3499,7 @@
 	)
 	(symbol
 		(lib_id "Connector:Screw_Terminal_01x02")
-		(at 41.91 38.1 0)
+		(at 43.18 48.26 180)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -3542,16 +3508,15 @@
 		(fields_autoplaced yes)
 		(uuid "34ff3dfd-1b5e-4378-ac0c-6747dbaad761")
 		(property "Reference" "J2"
-			(at 44.45 38.0999 0)
+			(at 43.18 41.91 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
-				(justify left)
 			)
 		)
 		(property "Value" "Screw_Terminal_01x02"
-			(at 44.45 40.6399 0)
+			(at 40.64 45.7201 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3560,8 +3525,8 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" ""
-			(at 41.91 38.1 0)
+		(property "Footprint" "Connector_JST:JST_XH_S2B-XH-A_1x02_P2.50mm_Horizontal"
+			(at 43.18 48.26 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3570,7 +3535,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 41.91 38.1 0)
+			(at 43.18 48.26 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3579,7 +3544,7 @@
 			)
 		)
 		(property "Description" "Generic screw terminal, single row, 01x02, script generated (kicad-library-utils/schlib/autogen/connector/)"
-			(at 41.91 38.1 0)
+			(at 43.18 48.26 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3741,7 +3706,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "3bfce5aa-1141-4254-8508-2953d82026fe")
-		(property "Reference" "D2_PWR_5V"
+		(property "Reference" "D2_PWR_5V1"
 			(at 43.4975 74.93 0)
 			(effects
 				(font
@@ -3757,7 +3722,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "LED_SMD:LED_0603_1608Metric"
 			(at 41.91 82.55 0)
 			(effects
 				(font
@@ -3802,7 +3767,7 @@
 		(instances
 			(project ""
 				(path "/b2330267-3262-4d12-877e-36612b3f2d84/027c0f16-9d10-4b80-857c-f21dafef43b8"
-					(reference "D2_PWR_5V")
+					(reference "D2_PWR_5V1")
 					(unit 1)
 				)
 			)
@@ -3902,7 +3867,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "TestPoint:TestPoint_Pad_D1.0mm"
 			(at 208.28 62.23 0)
 			(effects
 				(font
@@ -3969,7 +3934,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_01005_0402Metric"
 			(at 82.55 62.23 0)
 			(effects
 				(font
@@ -4106,7 +4071,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
 			(at 100.33 62.23 0)
 			(effects
 				(font
@@ -4375,7 +4340,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_01005_0402Metric"
 			(at 162.56 60.96 0)
 			(effects
 				(font
@@ -4443,7 +4408,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
 			(at 158.75 58.42 0)
 			(effects
 				(font
@@ -4580,7 +4545,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
 			(at 165.1 88.9 0)
 			(effects
 				(font
@@ -4640,7 +4605,7 @@
 				)
 			)
 		)
-		(property "Value" "1k"
+		(property "Value" "100"
 			(at 53.34 91.44 90)
 			(effects
 				(font
@@ -4648,7 +4613,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
 			(at 53.34 93.98 0)
 			(effects
 				(font
@@ -4850,7 +4815,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_01005_0402Metric"
 			(at 261.62 62.23 0)
 			(effects
 				(font
@@ -5052,7 +5017,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_01005_0402Metric"
 			(at 184.15 66.04 0)
 			(effects
 				(font
@@ -5503,7 +5468,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "cc4917df-74ad-417b-af38-d657b5b9b96c")
-		(property "Reference" "D1_PWR_BATT"
+		(property "Reference" "D1_PWR_BATT1"
 			(at 43.4975 66.04 0)
 			(effects
 				(font
@@ -5564,7 +5529,7 @@
 		(instances
 			(project ""
 				(path "/b2330267-3262-4d12-877e-36612b3f2d84/027c0f16-9d10-4b80-857c-f21dafef43b8"
-					(reference "D1_PWR_BATT")
+					(reference "D1_PWR_BATT1")
 					(unit 1)
 				)
 			)
@@ -5662,7 +5627,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
 			(at 160.02 74.93 0)
 			(effects
 				(font
@@ -5706,7 +5671,7 @@
 	)
 	(symbol
 		(lib_id "power:GND")
-		(at 36.83 41.91 0)
+		(at 48.26 43.18 180)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -5715,7 +5680,7 @@
 		(fields_autoplaced yes)
 		(uuid "d33ccd67-4c63-45cf-8002-7768f23c5879")
 		(property "Reference" "#PWR015"
-			(at 36.83 48.26 0)
+			(at 48.26 36.83 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5724,15 +5689,16 @@
 			)
 		)
 		(property "Value" "GND"
-			(at 36.83 46.99 0)
+			(at 50.8 41.9099 0)
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
+				(justify right)
 			)
 		)
 		(property "Footprint" ""
-			(at 36.83 41.91 0)
+			(at 48.26 43.18 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5741,7 +5707,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 36.83 41.91 0)
+			(at 48.26 43.18 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5750,7 +5716,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"GND\" , ground"
-			(at 36.83 41.91 0)
+			(at 48.26 43.18 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -5762,7 +5728,7 @@
 			(uuid "9fdb195b-26c6-47f5-8c31-f0febfe2b0bc")
 		)
 		(instances
-			(project ""
+			(project "projet"
 				(path "/b2330267-3262-4d12-877e-36612b3f2d84/027c0f16-9d10-4b80-857c-f21dafef43b8"
 					(reference "#PWR015")
 					(unit 1)
@@ -5788,7 +5754,7 @@
 				)
 			)
 		)
-		(property "Value" "1k"
+		(property "Value" "160"
 			(at 53.34 80.01 90)
 			(effects
 				(font
@@ -5796,7 +5762,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
 			(at 53.34 82.55 0)
 			(effects
 				(font
@@ -5864,7 +5830,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_01005_0402Metric"
 			(at 171.45 83.82 0)
 			(effects
 				(font
@@ -5934,7 +5900,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_01005_0402Metric"
 			(at 195.58 66.04 0)
 			(effects
 				(font
@@ -6070,7 +6036,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_01005_0402Metric"
 			(at 107.95 64.77 0)
 			(effects
 				(font
