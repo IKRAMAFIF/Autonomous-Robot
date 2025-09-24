@@ -67,6 +67,16 @@
 	)
 	(wire
 		(pts
+			(xy 100.33 80.01) (xy 123.19 80.01)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "3200c77f-2dbd-40ec-bbf2-b70b38e60f46")
+	)
+	(wire
+		(pts
 			(xy 100.33 72.39) (xy 123.19 72.39)
 		)
 		(stroke
@@ -77,33 +87,13 @@
 	)
 	(wire
 		(pts
-			(xy 172.72 115.57) (xy 193.04 115.57)
+			(xy 172.72 96.52) (xy 193.04 96.52)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "3b5becb4-c770-4faf-ae74-889b54d02fbe")
-	)
-	(wire
-		(pts
-			(xy 100.33 92.71) (xy 123.19 92.71)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "4ad06538-51a7-4455-be9b-576a14922f27")
-	)
-	(wire
-		(pts
-			(xy 100.33 95.25) (xy 123.19 95.25)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "5979fb13-153f-4ab4-834e-a18b648a1a53")
+		(uuid "556ad1d5-5965-404c-bb88-01d722f50321")
 	)
 	(wire
 		(pts
@@ -117,13 +107,23 @@
 	)
 	(wire
 		(pts
-			(xy 100.33 90.17) (xy 123.19 90.17)
+			(xy 172.72 92.71) (xy 193.04 92.71)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "70c276d7-2048-4b7a-8bb1-2bca325d5d1a")
+		(uuid "63af1591-3151-4021-ab05-d3c1eca2ed55")
+	)
+	(wire
+		(pts
+			(xy 172.72 88.9) (xy 193.04 88.9)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6ae37d4c-7f3f-4aeb-aef6-030e9c07bb8e")
 	)
 	(wire
 		(pts
@@ -137,43 +137,33 @@
 	)
 	(wire
 		(pts
-			(xy 172.72 118.11) (xy 193.04 118.11)
+			(xy 172.72 100.33) (xy 193.04 100.33)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "85294d2b-a3af-4c6f-9d88-4d82ec09f299")
+		(uuid "76454f6e-359b-4755-ad62-5f5e821856ed")
 	)
 	(wire
 		(pts
-			(xy 100.33 87.63) (xy 123.19 87.63)
+			(xy 100.33 93.98) (xy 123.19 93.98)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "8b32d5fd-74cc-4f24-a20f-03e3a51b9d67")
+		(uuid "9782853f-ad9d-43dc-b493-8da20cadfcf0")
 	)
 	(wire
 		(pts
-			(xy 172.72 110.49) (xy 193.04 110.49)
+			(xy 100.33 77.47) (xy 123.19 77.47)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "9fa5c6b9-5f92-419c-978d-0ff0fd8ae979")
-	)
-	(wire
-		(pts
-			(xy 172.72 113.03) (xy 193.04 113.03)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "b6c0cf8e-2b99-4f81-990b-0d4fa350099d")
+		(uuid "997eef8a-c9f3-4c6c-ac33-dbbc7253f292")
 	)
 	(wire
 		(pts
@@ -291,46 +281,6 @@
 				(justify left)
 			)
 		)
-		(pin "PHASE_A1" input
-			(at 193.04 110.49 180)
-			(uuid "52f94cb6-1cc8-45ef-aa06-8b691c5a21cd")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(pin "PHASE_A2" input
-			(at 193.04 115.57 180)
-			(uuid "2eada3c9-e178-4eb7-92b8-145b12a008db")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(pin "PHASE_B1" input
-			(at 193.04 113.03 180)
-			(uuid "b104a10b-fcf1-4153-87c8-cf1ab67a981f")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(pin "PHASE_B2" input
-			(at 193.04 118.11 180)
-			(uuid "dc2d83db-48c2-41ce-9c53-6b80bb325205")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
 		(pin "REV1" input
 			(at 193.04 123.19 180)
 			(uuid "69cad9d4-6ad5-475b-9957-d92b8e815fee")
@@ -344,6 +294,46 @@
 		(pin "REV2" input
 			(at 193.04 125.73 180)
 			(uuid "169d25e9-f2ef-4bbb-9d56-d6fcc580ad09")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "ENCOD_A1" input
+			(at 193.04 88.9 180)
+			(uuid "8d58f55d-0511-4daf-ad25-24b91b89d74d")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "ENCOD_A2" input
+			(at 193.04 92.71 180)
+			(uuid "ac592ece-6fed-4861-af76-b4f732b3bc35")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "ENCOD_B1" input
+			(at 193.04 96.52 180)
+			(uuid "a55f82a4-083a-4e29-85e8-3d438ab17521")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "ENCOD_B2" input
+			(at 193.04 100.33 180)
+			(uuid "60c0e678-1a1d-4ff3-9f74-d3a2d9c5144c")
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -393,26 +383,6 @@
 				(justify left top)
 			)
 		)
-		(pin "BORDER_1" output
-			(at 123.19 72.39 180)
-			(uuid "39cb3c69-48e8-4c72-ab4e-e6a39541c449")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(pin "BORDER_2" output
-			(at 123.19 74.93 180)
-			(uuid "f3de9b89-9104-411f-9e8b-d027721c560f")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
 		(pin "FWD2" output
 			(at 172.72 130.81 0)
 			(uuid "22585b06-d6fb-4934-9939-02cd7a52494d")
@@ -453,46 +423,6 @@
 				(justify left)
 			)
 		)
-		(pin "LIDAR_DEV_EN" output
-			(at 123.19 87.63 180)
-			(uuid "1a31530b-4e37-42f7-ad1b-c0003fb979d7")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(pin "LIDAR_M_EN" output
-			(at 123.19 90.17 180)
-			(uuid "4812550f-0344-498a-8cd4-a7167f76603d")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(pin "LIDAR_M_SCTR" output
-			(at 123.19 92.71 180)
-			(uuid "017b3310-f395-4dd3-981d-8d262ad33d81")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(pin "LIDAR_RX" input
-			(at 123.19 95.25 180)
-			(uuid "10cbff75-179f-40df-95e2-5ad537037f3b")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
 		(pin "LIDAR_TX" output
 			(at 123.19 97.79 180)
 			(uuid "7f83accd-cec2-4777-945d-cebde2532348")
@@ -501,36 +431,6 @@
 					(size 1.27 1.27)
 				)
 				(justify left)
-			)
-		)
-		(pin "PHASE_A1" input
-			(at 172.72 110.49 0)
-			(uuid "6353d7fc-4923-4f5a-a1b3-df07af4b8806")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(pin "PHASE_B1" input
-			(at 172.72 113.03 0)
-			(uuid "33454122-2930-4179-8e10-4294bb201180")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(pin "PHASE_B2" input
-			(at 172.72 118.11 0)
-			(uuid "1b743454-90ef-466d-8717-effdaf919970")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
 			)
 		)
 		(pin "REV1" output
@@ -573,14 +473,94 @@
 				(justify left)
 			)
 		)
-		(pin "PHASE_A2" input
-			(at 172.72 115.57 0)
-			(uuid "ace3fdc5-4b32-42ca-985c-c385a149d602")
+		(pin "LIDAR_M_CTR" input
+			(at 123.19 93.98 180)
+			(uuid "d7ff45b9-0fec-4913-bd5e-fae7fbf39a71")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "ENCOD_A1" input
+			(at 172.72 88.9 0)
+			(uuid "1c28b3fe-31c1-4ee9-be4f-0d450981bbd7")
 			(effects
 				(font
 					(size 1.27 1.27)
 				)
 				(justify right)
+			)
+		)
+		(pin "ENCOD_A2" input
+			(at 172.72 92.71 0)
+			(uuid "bc57bd52-e1a9-499f-8008-5c8d1a492129")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "ENCOD_B1" input
+			(at 172.72 96.52 0)
+			(uuid "5da68362-10a8-4a20-b616-908d18b86a4d")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "ENCOD_B2" input
+			(at 172.72 100.33 0)
+			(uuid "21512df9-1faf-415d-89fe-5a0d2452291b")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "BORDER_1" input
+			(at 123.19 72.39 180)
+			(uuid "788a29dd-d74d-4e3a-8a0b-8a4b55c71cb1")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "BORDER_2" input
+			(at 123.19 74.93 180)
+			(uuid "63303cea-4f30-4cba-9010-efb1739e0fe4")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "BORDER_3" input
+			(at 123.19 77.47 180)
+			(uuid "6766d1b1-b6cf-4fb0-b723-9aba92b9d3fe")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(pin "BORDER_4" input
+			(at 123.19 80.01 180)
+			(uuid "1ec8624c-fe46-4740-88df-b693025c8076")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
 			)
 		)
 		(instances
@@ -665,46 +645,6 @@
 				(justify right)
 			)
 		)
-		(pin "LIDAR_DEV_EN" input
-			(at 100.33 87.63 0)
-			(uuid "113e8757-2381-4da5-bf74-b118c70c8809")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(pin "LIDAR_M_EN" input
-			(at 100.33 90.17 0)
-			(uuid "0635d8a1-9ec5-421c-996c-aa0324ab92f5")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(pin "LIDAR_M_SCTR" input
-			(at 100.33 92.71 0)
-			(uuid "f6d82944-967a-4963-b421-00c51de0f6c9")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(pin "LIDAR_RX" input
-			(at 100.33 95.25 0)
-			(uuid "bf769fd7-9747-4826-aaed-cb5ed55d179a")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
 		(pin "LIDAR_TX" output
 			(at 100.33 97.79 0)
 			(uuid "203833c1-5eed-420a-b36d-41d8fa914256")
@@ -728,6 +668,36 @@
 		(pin "SDA" input
 			(at 100.33 104.14 0)
 			(uuid "71d3065d-4bb1-4257-8c51-73b0c1be7c88")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "LIDAR_M_CTR" input
+			(at 100.33 93.98 0)
+			(uuid "ce236d2f-5f4c-426c-b4c0-085750576fc8")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "BORDER_3" output
+			(at 100.33 77.47 0)
+			(uuid "5b23c528-db8d-467b-b105-269ac5d84b46")
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(pin "BORDER_4" output
+			(at 100.33 80.01 0)
+			(uuid "1ef64040-04ed-43fb-a15a-5dcabc01f318")
 			(effects
 				(font
 					(size 1.27 1.27)

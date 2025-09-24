@@ -3188,6 +3188,16 @@
 	)
 	(wire
 		(pts
+			(xy 69.85 132.08) (xy 73.66 132.08)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "0638bb70-43a2-4f0e-ae4c-0518f6fd7ac3")
+	)
+	(wire
+		(pts
 			(xy 109.22 83.82) (xy 113.03 83.82)
 		)
 		(stroke
@@ -3218,16 +3228,6 @@
 	)
 	(wire
 		(pts
-			(xy 109.22 86.36) (xy 113.03 86.36)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "19fb21a7-887c-425c-89ef-532ecf4472b3")
-	)
-	(wire
-		(pts
 			(xy 53.34 35.56) (xy 53.34 34.29)
 		)
 		(stroke
@@ -3245,16 +3245,6 @@
 			(type default)
 		)
 		(uuid "1c20f4d1-98a5-4ce4-85b3-b1ee2f65c383")
-	)
-	(wire
-		(pts
-			(xy 109.22 91.44) (xy 113.03 91.44)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "1c5ebaba-6918-4686-9a89-b399d8cde620")
 	)
 	(wire
 		(pts
@@ -3298,16 +3288,6 @@
 	)
 	(wire
 		(pts
-			(xy 68.58 119.38) (xy 73.66 119.38)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "262dd4c1-e40b-4391-b4b5-4c5912909b22")
-	)
-	(wire
-		(pts
 			(xy 123.19 34.29) (xy 134.62 34.29)
 		)
 		(stroke
@@ -3325,16 +3305,6 @@
 			(type default)
 		)
 		(uuid "2872fd0d-ec9b-439e-971b-e74df53a2510")
-	)
-	(wire
-		(pts
-			(xy 68.58 121.92) (xy 73.66 121.92)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "28f72558-9202-4359-a880-cda35a094d61")
 	)
 	(wire
 		(pts
@@ -3385,6 +3355,16 @@
 			(type default)
 		)
 		(uuid "2e7da847-ed83-4107-9ff7-75d156240992")
+	)
+	(wire
+		(pts
+			(xy 69.85 134.62) (xy 73.66 134.62)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2eb38812-75d5-483b-a7bc-d3b9e5f43f86")
 	)
 	(wire
 		(pts
@@ -3445,16 +3425,6 @@
 			(type default)
 		)
 		(uuid "377d75f5-b569-45a3-9761-41f005f2d2c6")
-	)
-	(wire
-		(pts
-			(xy 67.31 134.62) (xy 73.66 134.62)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "3938df0d-25b6-4bf1-8834-bad1fbe1e049")
 	)
 	(wire
 		(pts
@@ -3545,6 +3515,16 @@
 			(type default)
 		)
 		(uuid "50fe323f-21ae-4ef1-bae7-267d9649d906")
+	)
+	(wire
+		(pts
+			(xy 109.22 86.36) (xy 113.03 86.36)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5738bae5-61a2-48ad-b8d2-c10ce3bc1d4b")
 	)
 	(wire
 		(pts
@@ -3878,13 +3858,13 @@
 	)
 	(wire
 		(pts
-			(xy 68.58 127) (xy 73.66 127)
+			(xy 68.58 121.92) (xy 73.66 121.92)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "921c397e-e9c1-459c-aef4-d648d24c7a91")
+		(uuid "8f10fc23-ba2e-4e60-9121-d5543d8deacc")
 	)
 	(wire
 		(pts
@@ -3918,13 +3898,13 @@
 	)
 	(wire
 		(pts
-			(xy 67.31 132.08) (xy 73.66 132.08)
+			(xy 109.22 68.58) (xy 111.76 68.58)
 		)
 		(stroke
 			(width 0)
 			(type default)
 		)
-		(uuid "acd43770-b934-4743-b97d-4d22066fc50e")
+		(uuid "a9337a60-e578-4465-87cd-c18724b969cb")
 	)
 	(wire
 		(pts
@@ -3945,16 +3925,6 @@
 			(type default)
 		)
 		(uuid "b12b0dc7-ee58-4773-99a8-a956ba0e3af2")
-	)
-	(wire
-		(pts
-			(xy 109.22 88.9) (xy 113.03 88.9)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "b2a4fbb7-8202-4e19-8717-cd17adc78362")
 	)
 	(wire
 		(pts
@@ -4098,6 +4068,16 @@
 	)
 	(wire
 		(pts
+			(xy 68.58 119.38) (xy 73.66 119.38)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e651dd93-1f8c-47da-8a92-2929a15734a5")
+	)
+	(wire
+		(pts
 			(xy 30.48 40.64) (xy 30.48 43.18)
 		)
 		(stroke
@@ -4115,16 +4095,6 @@
 			(type default)
 		)
 		(uuid "e8e6c1eb-3c89-4499-bd3d-ef2361c75192")
-	)
-	(wire
-		(pts
-			(xy 109.22 68.58) (xy 111.76 68.58)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "e9118148-b651-4d79-8a4d-6d5fa4ee9e88")
 	)
 	(wire
 		(pts
@@ -4248,16 +4218,6 @@
 	)
 	(wire
 		(pts
-			(xy 68.58 124.46) (xy 73.66 124.46)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "fba11724-fd2b-47e1-bb08-cac3e783f720")
-	)
-	(wire
-		(pts
 			(xy 194.31 132.08) (xy 195.58 132.08)
 		)
 		(stroke
@@ -4275,16 +4235,6 @@
 			(type default)
 		)
 		(uuid "feb2dd08-c590-44d2-a059-a78ddfcc024a")
-	)
-	(wire
-		(pts
-			(xy 109.22 71.12) (xy 111.76 71.12)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "ff1d3c3c-4e6f-4e88-aeb2-631c0cc153a5")
 	)
 	(wire
 		(pts
@@ -4692,7 +4642,7 @@
 			)
 		)
 	)
-	(hierarchical_label "PHASE_A2"
+	(hierarchical_label "ENCOD_A2"
 		(shape input)
 		(at 68.58 114.3 180)
 		(effects
@@ -4703,18 +4653,7 @@
 		)
 		(uuid "052baf9b-ed5e-400a-98b8-e5acd0a56b93")
 	)
-	(hierarchical_label "BORDER_1"
-		(shape output)
-		(at 111.76 68.58 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "08e9b415-c969-497e-8cda-995e8e29968f")
-	)
-	(hierarchical_label "PHASE_B1"
+	(hierarchical_label "ENCOD_B1"
 		(shape input)
 		(at 68.58 109.22 180)
 		(effects
@@ -4736,18 +4675,29 @@
 		)
 		(uuid "18d9957a-6cc3-4f77-b6b1-14a022cb566f")
 	)
-	(hierarchical_label "LIDAR_TX"
-		(shape output)
-		(at 68.58 127 180)
+	(hierarchical_label "BORDER_1"
+		(shape input)
+		(at 109.22 60.96 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify right)
+			(justify left)
 		)
-		(uuid "3524edfa-538f-4d54-b810-461a6394dd11")
+		(uuid "1d8d2efc-6b8f-4c37-a085-4a036acdf54d")
 	)
-	(hierarchical_label "PHASE_A1"
+	(hierarchical_label "BORDER_3"
+		(shape input)
+		(at 109.22 66.04 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "5c905512-8afa-46a9-b6cb-dd70b6b412f2")
+	)
+	(hierarchical_label "ENCOD_A1"
 		(shape input)
 		(at 68.58 111.76 180)
 		(effects
@@ -4758,9 +4708,20 @@
 		)
 		(uuid "5d4fb894-7ab9-47a5-91fe-e6e621db0ac3")
 	)
+	(hierarchical_label "LIDAR_TX"
+		(shape output)
+		(at 111.76 68.58 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "62e8395e-e0f2-45af-8999-5259b7f1a9ce")
+	)
 	(hierarchical_label "SCL"
 		(shape input)
-		(at 68.58 119.38 180)
+		(at 69.85 132.08 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4768,6 +4729,17 @@
 			(justify right)
 		)
 		(uuid "7696c70e-26a9-45ea-9dac-5477b494f148")
+	)
+	(hierarchical_label "BORDER_4"
+		(shape input)
+		(at 109.22 71.12 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "784b170c-4cec-4325-b86d-3682f47de813")
 	)
 	(hierarchical_label "FWD2"
 		(shape output)
@@ -4780,20 +4752,20 @@
 		)
 		(uuid "78aeb966-5b86-4beb-920a-b72345c34b35")
 	)
-	(hierarchical_label "LIDAR_RX"
+	(hierarchical_label "LIDAR_M_CTR"
 		(shape input)
-		(at 68.58 124.46 180)
+		(at 113.03 86.36 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
-			(justify right)
+			(justify left)
 		)
-		(uuid "8fa576d0-cb63-4a4c-85f1-7f4a91493551")
+		(uuid "81dfe690-4d60-4c48-925d-bc83f06ee89b")
 	)
 	(hierarchical_label "SDA"
 		(shape input)
-		(at 68.58 121.92 180)
+		(at 69.85 134.62 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4804,7 +4776,7 @@
 	)
 	(hierarchical_label "REV1"
 		(shape output)
-		(at 67.31 132.08 180)
+		(at 68.58 119.38 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4813,42 +4785,9 @@
 		)
 		(uuid "97240bb0-b060-41ba-ad46-7ec23c6a9b33")
 	)
-	(hierarchical_label "LIDAR_M_EN"
-		(shape output)
-		(at 113.03 91.44 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "9e7453ab-d93f-47ac-b1d2-09fa5c385f90")
-	)
-	(hierarchical_label "LIDAR_DEV_EN"
-		(shape output)
-		(at 113.03 88.9 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "a0c58cfb-0e83-4758-b664-6a7e8c7b2bd8")
-	)
-	(hierarchical_label "BORDER_2"
-		(shape output)
-		(at 111.76 71.12 0)
-		(effects
-			(font
-				(size 1.27 1.27)
-			)
-			(justify left)
-		)
-		(uuid "a17d534a-6b47-445c-bf17-c2c7dacfb3f0")
-	)
 	(hierarchical_label "REV2"
 		(shape output)
-		(at 67.31 134.62 180)
+		(at 68.58 121.92 180)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -4868,18 +4807,18 @@
 		)
 		(uuid "bc640356-90b2-4170-84e5-1621f729ed3e")
 	)
-	(hierarchical_label "LIDAR_M_SCTR"
-		(shape output)
-		(at 113.03 86.36 0)
+	(hierarchical_label "BORDER_2"
+		(shape input)
+		(at 109.22 63.5 0)
 		(effects
 			(font
 				(size 1.27 1.27)
 			)
 			(justify left)
 		)
-		(uuid "d87608d7-de07-4e91-b42a-a3a3e03cdd5e")
+		(uuid "d77ad413-f295-4f4b-bb46-0e20ae4b2d34")
 	)
-	(hierarchical_label "PHASE_B2"
+	(hierarchical_label "ENCOD_B2"
 		(shape input)
 		(at 68.58 116.84 180)
 		(effects
