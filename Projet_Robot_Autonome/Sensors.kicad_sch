@@ -2064,6 +2064,16 @@
 	)
 	(wire
 		(pts
+			(xy 201.93 53.34) (xy 208.28 53.34)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "69249cda-c24b-43e2-ac1c-3ccd149a68a0")
+	)
+	(wire
+		(pts
 			(xy 187.96 60.96) (xy 196.85 60.96)
 		)
 		(stroke
@@ -2405,7 +2415,7 @@
 	)
 	(hierarchical_label "LIDAR_TX"
 		(shape output)
-		(at 196.85 53.34 0)
+		(at 208.28 53.34 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -5112,6 +5122,74 @@
 			(project "projet"
 				(path "/b2330267-3262-4d12-877e-36612b3f2d84/fb3a1801-63de-4558-9fb3-e6b98a5f4817"
 					(reference "#PWR041")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R_Small")
+		(at 199.39 53.34 90)
+		(mirror x)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "e813b209-cd77-43a6-92e7-f026cb47f1ab")
+		(property "Reference" "R26"
+			(at 199.39 58.42 90)
+			(effects
+				(font
+					(size 1.016 1.016)
+				)
+			)
+		)
+		(property "Value" "470R"
+			(at 199.39 55.88 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
+			(at 199.39 53.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 199.39 53.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor, small symbol"
+			(at 199.39 53.34 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "3be85b23-5811-47ab-901e-ce1a5be76608")
+		)
+		(pin "2"
+			(uuid "df3ac59d-a225-4d42-88f1-ae22e11ce418")
+		)
+		(instances
+			(project ""
+				(path "/b2330267-3262-4d12-877e-36612b3f2d84/fb3a1801-63de-4558-9fb3-e6b98a5f4817"
+					(reference "R26")
 					(unit 1)
 				)
 			)

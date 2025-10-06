@@ -1343,16 +1343,16 @@
 		(uuid "b11076d7-f0d0-4d84-a7f1-427b6ba30fb3")
 	)
 	(junction
-		(at 107.95 40.64)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "b148207a-5517-49a0-bb57-a7703206cee2")
-	)
-	(junction
 		(at 86.36 40.64)
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "b438961b-735e-465c-bb96-4a9c41f4c7c7")
+	)
+	(junction
+		(at 107.95 40.64)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "b5c6fe2c-ddde-4a37-967e-a2dc2c361e2a")
 	)
 	(junction
 		(at 106.68 106.68)
@@ -1608,6 +1608,16 @@
 	)
 	(wire
 		(pts
+			(xy 107.95 40.64) (xy 116.84 40.64)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "7d992657-cf28-4c28-81f0-0dd5bbeb807d")
+	)
+	(wire
+		(pts
 			(xy 72.39 106.68) (xy 80.01 106.68)
 		)
 		(stroke
@@ -1695,16 +1705,6 @@
 			(type default)
 		)
 		(uuid "ab94f3b0-7636-47e0-ba32-337a7e2bf0c6")
-	)
-	(wire
-		(pts
-			(xy 107.95 40.64) (xy 116.84 40.64)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "b3d6a3fd-be38-45ef-b2ac-99990a0ae73d")
 	)
 	(wire
 		(pts
@@ -2445,6 +2445,76 @@
 			(project "projet"
 				(path "/b2330267-3262-4d12-877e-36612b3f2d84/8f598f5d-aea8-4253-b953-247e767269d2"
 					(reference "C16")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:C_Small")
+		(at 107.95 43.18 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "34b00119-ecdd-4364-afd3-331f36ed1ff8")
+		(property "Reference" "C14"
+			(at 110.49 41.9162 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "10u"
+			(at 110.49 44.4562 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
+			(at 107.95 43.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 107.95 43.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Unpolarized capacitor, small symbol"
+			(at 107.95 43.18 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "bb6fcd49-aca3-43ef-a766-d54ec036ced5")
+		)
+		(pin "2"
+			(uuid "503ab269-b42a-4bf9-acc2-69dad89d2b88")
+		)
+		(instances
+			(project "ProjetX"
+				(path "/b2330267-3262-4d12-877e-36612b3f2d84/8f598f5d-aea8-4253-b953-247e767269d2"
+					(reference "C14")
 					(unit 1)
 				)
 			)
@@ -3247,7 +3317,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 106.68 109.22 0)
 			(effects
 				(font
@@ -3623,76 +3693,6 @@
 			(project "projet"
 				(path "/b2330267-3262-4d12-877e-36612b3f2d84/8f598f5d-aea8-4253-b953-247e767269d2"
 					(reference "TP4")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
-		(lib_id "Device:C_Small")
-		(at 107.95 43.18 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(fields_autoplaced yes)
-		(uuid "b1a11479-469f-466b-b3ee-a42ee77f7b7a")
-		(property "Reference" "C14"
-			(at 110.49 41.9162 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Value" "10u"
-			(at 110.49 44.4562 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
-			(at 107.95 43.18 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" "~"
-			(at 107.95 43.18 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(property "Description" "Unpolarized capacitor, small symbol"
-			(at 107.95 43.18 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(hide yes)
-			)
-		)
-		(pin "1"
-			(uuid "04683e26-a97c-4f82-9514-0905671e442d")
-		)
-		(pin "2"
-			(uuid "626978fb-b1be-4d35-b607-4581b1d44c9b")
-		)
-		(instances
-			(project "projet"
-				(path "/b2330267-3262-4d12-877e-36612b3f2d84/8f598f5d-aea8-4253-b953-247e767269d2"
-					(reference "C14")
 					(unit 1)
 				)
 			)

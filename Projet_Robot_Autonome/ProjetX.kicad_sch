@@ -264,16 +264,6 @@
 	)
 	(wire
 		(pts
-			(xy 100.33 87.63) (xy 123.19 87.63)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "0ea8d1b8-1817-46d8-bbed-f65e87ae07be")
-	)
-	(wire
-		(pts
 			(xy 172.72 123.19) (xy 193.04 123.19)
 		)
 		(stroke
@@ -471,16 +461,6 @@
 			(type default)
 		)
 		(uuid "d542428b-1372-4754-8f57-4dbd10793e3d")
-	)
-	(wire
-		(pts
-			(xy 100.33 90.17) (xy 123.19 90.17)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "defaab0c-2ea2-46b7-b5a9-acef04a1842c")
 	)
 	(wire
 		(pts
@@ -1234,26 +1214,6 @@
 				(justify left)
 			)
 		)
-		(pin "BORDER_5" input
-			(at 123.19 87.63 180)
-			(uuid "d6751283-758c-4f39-9953-ca14d1c3ff31")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
-		(pin "BORDER_6" input
-			(at 123.19 90.17 180)
-			(uuid "c7b7d9b7-4594-4414-9daf-3111968bcc1d")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify left)
-			)
-		)
 		(instances
 			(project "ProjetX"
 				(path "/b2330267-3262-4d12-877e-36612b3f2d84"
@@ -1409,26 +1369,6 @@
 		(pin "BLE_TX" input
 			(at 100.33 118.11 0)
 			(uuid "acebb9a8-7834-4129-9345-bd5f282e7d73")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(pin "BORDER_5" output
-			(at 100.33 87.63 0)
-			(uuid "58978d11-5185-48c5-896a-afc41acbe44e")
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-				(justify right)
-			)
-		)
-		(pin "BORDER_6" output
-			(at 100.33 90.17 0)
-			(uuid "d70f6126-4547-4eaa-bce1-88bb72b49366")
 			(effects
 				(font
 					(size 1.27 1.27)
