@@ -50,3 +50,5 @@ L’alimentation est assurée par une **batterie NiMH 7.2 V**, et le robot intè
 | LEDs + Résistances | **0603** | Indication d’état et debug |
 
 ---
+
+## Architecture du système global
