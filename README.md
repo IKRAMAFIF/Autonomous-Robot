@@ -1,9 +1,11 @@
-*CATRONIC Robot
+**CATRONIC Robot**
 Projet 2025/2026
 
-*Membres du groupe
+**Membres du groupe**
 AFIF Ikram
 AIT ALLA Hajar
 MENJLI Fakhri
 
-*Description du projet
+**Description du projet**
+
+
