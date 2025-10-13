@@ -7,7 +7,7 @@
 ## 👩‍💻 Équipe de projet
 - **AFIF Ikram**
 - **AIT ALLA Hajar**
-- **Fakhri El MENJLI**
+- **Fakhri MENJLI**
 
 
 ---
