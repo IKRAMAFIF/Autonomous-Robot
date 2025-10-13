@@ -1,0 +1,9 @@
+Manufacturer=C & K COMPONENTS
+PartNumber=1101M2S3CQE2
+PartCategory=Switch
+PackageCategory=Other
+PinCount=3
+Version=3.1
+Released=2018-05-01 11:50:24
+Downloaded=2025-10-07 08:27:05
+3D=Y
