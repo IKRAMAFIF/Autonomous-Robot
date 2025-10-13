@@ -4,6 +4,14 @@
 	(generator_version "9.0")
 	(uuid "b2330267-3262-4d12-877e-36612b3f2d84")
 	(paper "A4")
+	(title_block
+		(title "CATRONIC")
+		(date "2025-10-13")
+		(company "ENSEA")
+		(comment 1 "HAJAR AIT ALLA")
+		(comment 2 "IKRAM AFIF")
+		(comment 3 "FAKHRI MENJLI")
+	)
 	(lib_symbols
 		(symbol "Mechanical:MountingHole_Pad"
 			(pin_numbers
