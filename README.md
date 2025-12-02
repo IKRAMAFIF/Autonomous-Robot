@@ -1,76 +1,118 @@
-# 🤖 CATRONIC
-
-**Projet académique – ENSEA 2025/2026**
-
----
-
-## 👩‍💻 Équipe de projet
-- **AFIF Ikram**
-- **AIT ALLA Hajar**
-- **MENJLI Fakhri**
-
-
----
 ## 🧠 Introduction
-Le projet **CATRONIC** consiste à développer un **robot autonome** capable de jouer au **chat et à la souris** avec d’autres robots du même type.  
-Les robots évoluent sur une **table sans bordures**, ils doivent donc **détecter les bords** afin d’éviter toute chute.  
 
-Le robot repose sur un **microcontrôleur STM32** et applique des **principes de système temps réel** pour gérer la communication entre ses composants matériels et logiciels.  
+Le projet **CATRONIC** consiste à développer un **robot autonome** capable de jouer au **chat et à la souris** avec d’autres robots du même type.  
+Les robots évoluent sur une **table sans bordures**, ils doivent donc être capables de **détecter les bords** afin d’éviter toute chute.
+
+Le robot repose sur un **microcontrôleur STM32** et applique des **principes de systèmes temps réel** pour gérer la communication entre ses composants matériels et logiciels.  
 Il dispose de deux modes de fonctionnement :  
 
 - **Mode Chat 🐱 :** le robot poursuit le robot adverse.  
 - **Mode Souris 🐭 :** le robot fuit le robot adverse.  
 
-L’alimentation est assurée par une **batterie NiMH 7.2 V**, et le robot intègre plusieurs capteurs tels qu’un **accéléromètre ADXL343**, un **LIDAR YDLIDAR X2**, et des **capteurs de bordure**.
+L’alimentation est assurée par une **batterie NiMH 7.2 V**, et le robot intègre plusieurs capteurs tels qu’un **accéléromètre ADXL343**, un **LIDAR YDLIDAR X2**, et des **capteurs WS-MITV** pour la détection des bords.
 
 ---
 
-## 🎯 Objectifs du projet
-- Concevoir une carte électronique complète sous **KiCad**.  
-- Programmer le **STM32** avec **FreeRTOS** pour la gestion multitâche.  
-- Contrôler les **moteurs DC** à l’aide de drivers PWM.  
-- Intégrer les **capteurs LIDAR, accéléromètre et capteurs fin de course**.  
-- Assurer la **détection des collisions et bords de table**.  
-- Mettre en œuvre une **communication UART et I²C** entre les périphériques.  
-
----
-
-## ⚙️ Matériel et composants utilisés
-| Composant | Référence | Fonction |
-|------------|------------|-----------|
-| Microcontrôleur | **STM32G431CBU6** | Gestion du système temps réel |
-| Driver moteur | **ZXBM5210-SP-13** | Commande des moteurs DC (PWM) |
-| Accéléromètre | **ADXL343BCCZ-RL** | Détection des chocs et inclinaisons |
-| LIDAR | **YDLIDAR X2** | Détection des obstacles et adversaires |
-| Régulateur 5 V | **MP1475S** | Alimentation du LIDAR |
-| Régulateur 3.3 V | **BU33SD5WG-TR** | Alimentation du STM32 et capteurs |
-| Batterie | **NiMH 7.2 V 1.3 Ah** | Source d’alimentation principale |
-| Capteurs bordure | **GP2Y0A41SK0F** | Détection de table et vide |
-| Connecteurs | **JST 2.54 mm** | Liaison entre modules |
-| LEDs + Résistances | **0603** | Indication d’état et debug |
-
----
-
-## Architecture du système global
-
-🧩 Architecture du système
+## 🧩 Architecture du système global
 
 ### 🧭 Diagramme fonctionnel
 ![Diagramme d'architecture](images/diagramme_architecture.png)
 
-### ⚡ Architecture du PCB
-![Architecture PCB](images/pcb_architecture.png)
+### 🧠 Description générale
 
-### 🔌 Schéma électronique global
-![Schéma électronique](images/schema_global.png)
+Le robot **CATRONIC** est un système embarqué autonome conçu pour simuler un jeu de **chat et de souris** entre plusieurs robots identiques.  
+Chaque robot interagit avec son environnement grâce à un ensemble de capteurs et d’actionneurs coordonnés par un **microcontrôleur STM32G431CBU6**.  
+
+L’architecture du système est organisée autour de cinq sous-ensembles principaux :  
+1. **L’alimentation**,  
+2. **La commande (microcontrôleur et logiciel embarqué)**,  
+3. **L’acquisition (capteurs)**,  
+4. **Le déplacement (moteurs et drivers)**,  
+5. **L’interface utilisateur**.  
 
 ---
 
-## 🔋 Alimentation et régulation
-Le robot est alimenté par une **batterie 7.2 V NiMH**.  
-Cette tension est régulée vers :
-- **5 V (MP1475S)** pour le LIDAR.  
-- **3.3 V (BU33SD5WG-TR)** pour le microcontrôleur, l’accéléromètre et les capteurs.
+#### 🔋 Sous-système d’alimentation
+Le robot est alimenté par une **batterie NiMH de 7.2 V – 1.3 Ah**, fournissant l’énergie à l’ensemble du système.  
+Deux régulateurs assurent la distribution des tensions :  
+- **MP1475S (5 V)** : alimentation du **LIDAR**.  
+- **BU33SD5WG-TR (3.3 V)** : alimentation du **STM32**, de l’**accéléromètre ADXL343** et des **capteurs WS-MITV**.  
 
-```text
-+7.2V → [BUCK 5V] → [BUCK 3.3V] → MCU + capteurs
+Cette architecture garantit une alimentation stable et adaptée à chaque composant, tout en protégeant les circuits sensibles contre les variations de tension.
+
+---
+
+#### 🧩 Sous-système de commande
+Le cœur du système repose sur un **STM32G431CBU6** (ARM Cortex-M4).  
+Il exécute un programme développé sous **STM32CubeIDE**, basé sur un **noyau temps réel FreeRTOS**.  
+Le RTOS permet une gestion multitâche efficace entre les différents sous-systèmes :  
+- lecture et traitement des capteurs,  
+- gestion des moteurs,  
+- analyse des données du LIDAR,  
+- sélection du mode de fonctionnement (Chat ou Souris),  
+- communication UART pour le débogage.  
+
+Cette structure logicielle garantit une **réactivité élevée**, une **synchronisation précise** et un comportement stable même lors des déplacements rapides.
+
+---
+
+#### 📡 Sous-système d’acquisition
+Le robot perçoit son environnement à l’aide de plusieurs capteurs complémentaires :  
+
+- **LIDAR YDLIDAR X2 :** permet de balayer l’environnement sur 360° et de localiser les autres robots ou obstacles.  
+  Les données sont transmises au microcontrôleur via **UART avec DMA** et traitées en temps réel.  
+
+- **Accéléromètre ADXL343 :** détecte les **chocs, inclinaisons et vibrations**.  
+  Il sert à repérer les collisions avec d’autres robots et a également été utilisé comme **arrêt d’urgence** lors des essais.  
+
+- **Capteurs WS-MITV :** montés à l’avant du robot, ces capteurs analogiques mesurent la **distance entre le robot et la surface de la table**.  
+  Une variation rapide de la tension de sortie signale l’absence de surface en dessous ; le microcontrôleur en déduit la **présence d’un bord** et déclenche une manœuvre d’évitement (recul ou rotation).  
+  Ce système assure la **sécurité du déplacement** et évite toute chute.
+
+---
+
+#### ⚙️ Sous-système de déplacement
+Le mouvement est assuré par **deux moteurs DC**, chacun piloté par un **driver ZXBM5210-SP-13**.  
+Les moteurs sont commandés par des signaux **PWM** générés par le STM32, permettant d’ajuster la **vitesse** et la **direction**.  
+Cette configuration différentielle offre la possibilité :  
+- d’avancer ou reculer,  
+- de pivoter sur place,  
+- et de modifier la trajectoire selon les données des capteurs.  
+
+L’intégration à FreeRTOS assure des réactions immédiates aux événements tels qu’un bord détecté ou une collision.
+
+---
+
+#### 🧰 Interface utilisateur
+L’interface du robot comprend :  
+- un **interrupteur général** d’alimentation,  
+- un **bouton de démarrage**,  
+- une **LED d’état** indiquant le mode de fonctionnement,  
+- un **connecteur SWD** pour la programmation et le débogage via ST-Link.  
+
+Cette interface simple permet une utilisation rapide et un suivi visuel du fonctionnement du robot.
+
+---
+
+#### 🧠 Fonctionnement global
+Lors de la mise sous tension, le **STM32** initialise tous les périphériques (UART, I²C, PWM, GPIO) et lance le **noyau FreeRTOS**.  
+Les tâches s’exécutent en parallèle :  
+- les **capteurs WS-MITV** surveillent les bords,  
+- le **LIDAR** balaie la zone et transmet les positions d’obstacles,  
+- l’**accéléromètre** détecte les collisions,  
+- et la logique logicielle choisit la réaction selon le mode actif.  
+
+En **mode Chat 🐱**, le robot analyse la position de son adversaire et se dirige vers lui.  
+En **mode Souris 🐭**, il cherche au contraire à maintenir la plus grande distance possible tout en évitant les bords.  
+
+Cette coordination entre capteurs, actionneurs et logiciel embarqué confère au robot **autonomie**, **réactivité** et **stabilité**.
+
+---
+
+✅ **En résumé**, le robot **CATRONIC** illustre un système embarqué complet combinant :
+- **conception électronique et routage PCB**,  
+- **programmation multitâche en temps réel**,  
+- **intégration de capteurs analogiques et numériques**,  
+- et **prise de décision autonome**.  
+
+Il représente une réalisation complète de la robotique embarquée : perception, décision et action.
