@@ -101,8 +101,6 @@ void Error_Handler(void);
 #define SWDIO_GPIO_Port GPIOA
 #define SWCLK_Pin GPIO_PIN_14
 #define SWCLK_GPIO_Port GPIOA
-#define CHAT_SOURIS_Pin GPIO_PIN_15
-#define CHAT_SOURIS_GPIO_Port GPIOA
 #define SWD_TX_Pin GPIO_PIN_10
 #define SWD_TX_GPIO_Port GPIOC
 #define SWD_RX_Pin GPIO_PIN_11

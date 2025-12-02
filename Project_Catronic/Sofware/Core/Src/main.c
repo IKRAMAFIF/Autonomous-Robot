@@ -22,10 +22,10 @@
 #include "tim.h"
 #include "usart.h"
 #include "gpio.h"
-#include "MoteurPWM.h"
+
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "MoteurPWM.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -46,7 +46,9 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-
+Moteur_HandleTypeDef moteurD;   // moteur droite
+Moteur_HandleTypeDef moteurG;   // moteur gauche
+h_Robot robot;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -57,10 +59,12 @@ void SystemClock_Config(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-int __io_putchar(int ch) {
-	HAL_UART_Transmit(&huart1, (uint8_t*)&ch, 1, HAL_MAX_DELAY);
-	return ch;
+int __io_putchar(int ch)
+{
+    HAL_UART_Transmit(&huart1, (uint8_t*)&ch, 1, HAL_MAX_DELAY);
+    return ch;
 }
+
 /* USER CODE END 0 */
 
 /**
@@ -101,32 +105,47 @@ int main(void)
   MX_USART3_UART_Init();
   MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
-  Motor_Init();
 
-  // AVANCER
-  for (int i = 0; i <= 90; i++)
-  {
-      Motor_SetSpeed(MOTOR_1, i);
-      Motor_SetSpeed(MOTOR_2, i);
-      HAL_Delay(100);
-  }
-  HAL_Delay(1500);
+	Moteur_init(&moteurD, &htim1, TIM_CHANNEL_1);   // Moteur droit sur CH1
+	Moteur_init(&moteurG, &htim1, TIM_CHANNEL_2);   // Moteur gauche sur CH2
 
-  Motor_SetAngle(180);
+	Robot_Init(&robot, &moteurD, &moteurG);
 
-  // RECULER
-  for (int i = 0; i >= -90; i--)
-  {
-      Motor_SetSpeed(MOTOR_1, i);
-      Motor_SetSpeed(MOTOR_2, i);
-      HAL_Delay(100);
-  }
-  HAL_Delay(1500);
-  Motor_Stop(MOTOR_1);
-  Motor_Stop(MOTOR_2);
+	HAL_Delay(500); // petite pause
 
-  /****accelerometre**********
-  printf("\r\n accelerometre test \r\n");
+	// --------------------------------------------------------
+	// 1) AVANCER 2 SECONDES À 40%
+	// --------------------------------------------------------
+	Robot_Start(&robot, 40);
+	HAL_Delay(10000);
+
+	Robot_Stop(&robot);
+	HAL_Delay(2000);
+
+
+	// --------------------------------------------------------
+	// 2) ROTATION : TOURNE 90° À DROITE À 30%
+	// --------------------------------------------------------
+	Robot_setAngle(&robot, 90, 30);
+	HAL_Delay(1000);
+
+	// --------------------------------------------------------
+	// 3) ROTATION : TOURNE 90° À GAUCHE À 30%
+	// --------------------------------------------------------
+	Robot_setAngle(&robot, -90, 30);
+	HAL_Delay(1000);
+
+	// --------------------------------------------------------
+	// 4) RECULER 2 SECONDES À 35%
+	// --------------------------------------------------------
+	Robot_Recule(&robot, 35);
+	HAL_Delay(10000);
+
+	Robot_Stop(&robot);
+
+
+	/****accelerometre**********
+    printf("\r\n accelerometre test \r\n");
 
 	HAL_StatusTypeDef ret;
 
@@ -154,6 +173,7 @@ int main(void)
   /* USER CODE BEGIN WHILE */
 	while (1)
 	{
+
 		/******accelerometre**********
 		//detection de choc
 		if (ADXL343_CheckShock(&hi2c1))
@@ -178,7 +198,7 @@ int main(void)
 		}
 
 		HAL_Delay(100);
-		*/
+		 */
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

@@ -1,6 +1,9 @@
-../Core/Src/MoteurPWM.c:9:6:Motor_Init	1
-../Core/Src/MoteurPWM.c:82:6:Motor_SetSpeed	8
-../Core/Src/MoteurPWM.c:142:6:Motor_Stop	1
-../Core/Src/MoteurPWM.c:147:6:Encoder_Reset	2
-../Core/Src/MoteurPWM.c:155:9:Encoder_GetCount	2
-../Core/Src/MoteurPWM.c:163:6:Motor_SetAngle	3
+../Core/Src/MoteurPWM.c:8:6:Moteur_init	1
+../Core/Src/MoteurPWM.c:22:6:Moteur_setSpeed	15
+../Core/Src/MoteurPWM.c:51:6:Moteur_setDirection	8
+../Core/Src/MoteurPWM.c:79:6:Moteur_stop	6
+../Core/Src/MoteurPWM.c:88:6:Robot_Init	1
+../Core/Src/MoteurPWM.c:102:6:Robot_Start	1
+../Core/Src/MoteurPWM.c:112:6:Robot_Recule	1
+../Core/Src/MoteurPWM.c:122:6:Robot_Stop	1
+../Core/Src/MoteurPWM.c:133:6:Robot_setAngle	2

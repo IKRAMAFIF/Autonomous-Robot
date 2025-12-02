@@ -2,22 +2,48 @@
 #define MOTEURPWM_H
 
 #include "tim.h"
-#include <stdint.h>
+#include "stdint.h"
 
-typedef enum {
-    MOTOR_1 = 0,   // CH2 / CH2N
-    MOTOR_2 = 1    // CH1 / CH1N
-} MotorID;
-typedef enum {
-    ENCODER_1 = 0,   // Moteur 1 → TIM4 (PA11 B1, PA12 A1)
-    ENCODER_2 = 1    // Moteur 2 → TIM3 (PC6 B2, PA5 A2)
-} EncoderID;
+// Directions
+#define MOTEUR_AVANCER 'A'
+#define MOTEUR_RECULER 'R'
+#define MOTEUR_STOP    'S'
 
-void Motor_Init(void);
-void Motor_SetSpeed(MotorID motor, int speed);
-void Motor_Stop(MotorID motor);
+// Robot params
+#define Ts   0.01f         // période échantillonnage
+#define L    0.158f        // distance entre roues (m)
+#define SPEED_MAX_PWM 8500 // ARR max
 
-void Encoder_Reset(EncoderID enc);
-int32_t Encoder_GetCount(EncoderID enc);
-void Motor_SetAngle(float angle_deg);
+
+
+typedef struct {
+    TIM_HandleTypeDef* pwm_timer;
+    uint32_t channel;
+    char direction;
+    int vitesse;
+} Moteur_HandleTypeDef;
+
+typedef struct {
+    float vitesse;
+    float omega;
+    float theta;
+    char direction;
+
+    Moteur_HandleTypeDef* moteur_droite;
+    Moteur_HandleTypeDef* moteur_gauche;
+} h_Robot;
+
+
+void Moteur_init(Moteur_HandleTypeDef* moteur, TIM_HandleTypeDef* timer, uint32_t channel);
+void Moteur_setSpeed(Moteur_HandleTypeDef* moteur, int percent);
+void Moteur_setDirection(Moteur_HandleTypeDef* moteur, char direction);
+void Moteur_stop(Moteur_HandleTypeDef* moteur);
+
+
+void Robot_Init(h_Robot* robot, Moteur_HandleTypeDef* moteurD, Moteur_HandleTypeDef* moteurG);
+void Robot_Start(h_Robot* robot, int vitesse_percent);
+void Robot_Recule(h_Robot* robot, int vitesse_percent);
+void Robot_Stop(h_Robot* robot);
+void Robot_setAngle(h_Robot* robot, float angle_deg, int vitesse_percent);
+
 #endif

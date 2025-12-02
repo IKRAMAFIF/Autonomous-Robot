@@ -1,138 +1,145 @@
 #include "MoteurPWM.h"
-#include <stdlib.h>
 #include <math.h>
+#include <stdlib.h>
 
-extern TIM_HandleTypeDef htim1;
-extern TIM_HandleTypeDef htim3;   // Encoder moteur 2
-extern TIM_HandleTypeDef htim4;   // Encoder moteur 1
-
-void Motor_Init(void)
+// ---------------------------------------------------------
+// INITIALISATION MOTEUR
+// ---------------------------------------------------------
+void Moteur_init(Moteur_HandleTypeDef* moteur, TIM_HandleTypeDef* timer, uint32_t channel)
 {
-    // Moteur 2 → CH1 / CH1N
-    HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);		// Forward
-    HAL_TIMEx_PWMN_Start(&htim1, TIM_CHANNEL_1);	// Reverse
+    moteur->pwm_timer = timer;
+    moteur->channel = channel;
+    moteur->direction = MOTEUR_STOP;
+    moteur->vitesse = 0;
 
-    // Moteur 1 → CH2 / CH2N
-    HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_2);
-    HAL_TIMEx_PWMN_Start(&htim1, TIM_CHANNEL_2);
-
-    // duty = 0 %
-    __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, 0);
-    __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_2, 0);
-
-    HAL_TIM_Encoder_Start(&htim3, TIM_CHANNEL_ALL);
-    HAL_TIM_Encoder_Start(&htim4, TIM_CHANNEL_ALL);
-
-    __HAL_TIM_SET_COUNTER(&htim3, 0);
-    __HAL_TIM_SET_COUNTER(&htim4, 0);
+    HAL_TIM_PWM_Start(timer, channel);
+    HAL_TIMEx_PWMN_Stop(timer, channel);
 }
 
-void Motor_SetSpeed(MotorID motor, int speed)
+// ---------------------------------------------------------
+// DEFINIR LA VITESSE EN %
+// ---------------------------------------------------------
+void Moteur_setSpeed(Moteur_HandleTypeDef* moteur, int percent)
 {
-    if (speed > 100)  speed = 100;
-    if (speed < -100) speed = -100;
+    if (percent > 100)  percent = 100;
+    if (percent < -100) percent = -100;
 
-    uint32_t pwm = (abs(speed) * htim1.Instance->ARR) / 100;
+    moteur->vitesse = percent;
 
-    if (motor == MOTOR_1)
+    // Conversion % -> PWM
+    uint32_t pwm = (abs(percent) * SPEED_MAX_PWM) / 100;
+
+    if (percent > 0)
     {
-        // MOTEUR 1 → TIM1_CH2 / TIM1_CH2N
-        if (speed > 0)          // AVANT
-        {
-            HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_2);
-            HAL_TIMEx_PWMN_Stop(&htim1, TIM_CHANNEL_2);
-            __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_2, pwm);
-        }
-        else if (speed < 0)     // ARRIÈRE
-        {
-            HAL_TIM_PWM_Stop(&htim1, TIM_CHANNEL_2);
-            HAL_TIMEx_PWMN_Start(&htim1, TIM_CHANNEL_2);
-            __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_2, pwm);
-        }
-        else                    // STOP
-        {
-            __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_2, 0);
-            HAL_TIM_PWM_Stop(&htim1, TIM_CHANNEL_2);
-            HAL_TIMEx_PWMN_Stop(&htim1, TIM_CHANNEL_2);
-        }
+        Moteur_setDirection(moteur, MOTEUR_AVANCER);
+        __HAL_TIM_SET_COMPARE(moteur->pwm_timer, moteur->channel, pwm);
     }
-    else  // MOTOR_2
+    else if (percent < 0)
     {
-        // MOTEUR 2 → TIM1_CH1 / TIM1_CH1N
-        if (speed > 0)          // AVANT
-        {
-            HAL_TIM_PWM_Start(&htim1, TIM_CHANNEL_1);
-            HAL_TIMEx_PWMN_Stop(&htim1, TIM_CHANNEL_1);
-            __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, pwm);
-        }
-        else if (speed < 0)     // ARRIÈRE
-        {
-            HAL_TIM_PWM_Stop(&htim1, TIM_CHANNEL_1);
-            HAL_TIMEx_PWMN_Start(&htim1, TIM_CHANNEL_1);
-            __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, pwm);
-        }
-        else                    // STOP
-        {
-            __HAL_TIM_SET_COMPARE(&htim1, TIM_CHANNEL_1, 0);
-            HAL_TIM_PWM_Stop(&htim1, TIM_CHANNEL_1);
-            HAL_TIMEx_PWMN_Stop(&htim1, TIM_CHANNEL_1);
-        }
+        Moteur_setDirection(moteur, MOTEUR_RECULER);
+        __HAL_TIM_SET_COMPARE(moteur->pwm_timer, moteur->channel, pwm);
+    }
+    else
+    {
+        Moteur_setDirection(moteur, MOTEUR_STOP);
     }
 }
 
-
-void Motor_Stop(MotorID motor)
+// ---------------------------------------------------------
+// DIRECTION
+// ---------------------------------------------------------
+void Moteur_setDirection(Moteur_HandleTypeDef* moteur, char direction)
 {
-    Motor_SetSpeed(motor, 0);
-}
+    moteur->direction = direction;
 
-void Encoder_Reset(EncoderID enc)
-{
-    if (enc == ENCODER_1)
-        __HAL_TIM_SET_COUNTER(&htim4, 0);
-    else
-        __HAL_TIM_SET_COUNTER(&htim3, 0);
-}
-
-int32_t Encoder_GetCount(EncoderID enc)
-{
-    if (enc == ENCODER_1)
-        return __HAL_TIM_GET_COUNTER(&htim4);
-    else
-        return __HAL_TIM_GET_COUNTER(&htim3);
-}
-
-void Motor_SetAngle(float angle_deg)
-{
-	//ticks_per_deg = ticks_par_tour_de_roue * (L / (diametre_roue * 360));
-	float ticks_per_deg = 5.3f;
-    int speed = 50;
-
-    // Reset encodeurs
-    Encoder_Reset(ENCODER_1);
-    Encoder_Reset(ENCODER_2);
-
-    int direction = (angle_deg > 0) ? 1 : -1;
-    speed *= direction;
-
-    while (1)
+    switch (direction)
     {
-        int32_t m1 = Encoder_GetCount(ENCODER_1);
-        int32_t m2 = Encoder_GetCount(ENCODER_2);
-
-        int32_t delta = (m1 - m2);
-        float angle_now = delta / ticks_per_deg;
-
-        if (fabs(angle_now) >= fabs(angle_deg))
+        case MOTEUR_AVANCER:
+            HAL_TIM_PWM_Start(moteur->pwm_timer, moteur->channel);
+            HAL_TIMEx_PWMN_Stop(moteur->pwm_timer, moteur->channel);
             break;
 
-        Motor_SetSpeed(MOTOR_1,  speed);
-        Motor_SetSpeed(MOTOR_2, -speed);
+        case MOTEUR_RECULER:
+            HAL_TIMEx_PWMN_Start(moteur->pwm_timer, moteur->channel);
+            HAL_TIM_PWM_Stop(moteur->pwm_timer, moteur->channel);
+            break;
 
-        HAL_Delay(5);
+        case MOTEUR_STOP:
+        default:
+            HAL_TIM_PWM_Stop(moteur->pwm_timer, moteur->channel);
+            HAL_TIMEx_PWMN_Stop(moteur->pwm_timer, moteur->channel);
+            __HAL_TIM_SET_COMPARE(moteur->pwm_timer, moteur->channel, 0);
+            break;
     }
-
-    Motor_Stop(MOTOR_1);
-    Motor_Stop(MOTOR_2);
 }
 
+// ---------------------------------------------------------
+// STOP
+// ---------------------------------------------------------
+void Moteur_stop(Moteur_HandleTypeDef* moteur)
+{
+    Moteur_setDirection(moteur, MOTEUR_STOP);
+    __HAL_TIM_SET_COMPARE(moteur->pwm_timer, moteur->channel, 0);
+}
+
+// ---------------------------------------------------------
+// ROBOT INIT
+// ---------------------------------------------------------
+void Robot_Init(h_Robot* robot, Moteur_HandleTypeDef* moteurD, Moteur_HandleTypeDef* moteurG)
+{
+    robot->moteur_droite = moteurD;
+    robot->moteur_gauche = moteurG;
+
+    robot->vitesse = 0;
+    robot->omega = 0;
+    robot->theta = 0;
+    robot->direction = MOTEUR_STOP;
+}
+
+// ---------------------------------------------------------
+// AVANCER
+// ---------------------------------------------------------
+void Robot_Start(h_Robot* robot, int vitesse_percent)
+{
+    Moteur_setSpeed(robot->moteur_droite, vitesse_percent);
+    Moteur_setSpeed(robot->moteur_gauche, vitesse_percent);
+    robot->direction = MOTEUR_AVANCER;
+}
+
+// ---------------------------------------------------------
+// RECULER
+// ---------------------------------------------------------
+void Robot_Recule(h_Robot* robot, int vitesse_percent)
+{
+    Moteur_setSpeed(robot->moteur_droite, -vitesse_percent);
+    Moteur_setSpeed(robot->moteur_gauche, -vitesse_percent);
+    robot->direction = MOTEUR_RECULER;
+}
+
+// ---------------------------------------------------------
+// STOP
+// ---------------------------------------------------------
+void Robot_Stop(h_Robot* robot)
+{
+    Moteur_stop(robot->moteur_droite);
+    Moteur_stop(robot->moteur_gauche);
+    robot->direction = MOTEUR_STOP;
+}
+
+// ---------------------------------------------------------
+// ROTATION SIMPLE (stable et propre)
+// ---------------------------------------------------------
+
+void Robot_setAngle(h_Robot* robot, float angle_deg, int vitesse_percent)
+{
+    float direction = (angle_deg > 0) ? 1 : -1;
+
+    // moteur gauche avance, moteur droite recule (ou inverse selon ton montage)
+    Moteur_setSpeed(robot->moteur_gauche,  vitesse_percent * direction);
+    Moteur_setSpeed(robot->moteur_droite, -vitesse_percent * direction);
+
+    HAL_Delay((int)(fabs(angle_deg) * 8));
+    // ← 8 ms par degré → à ajuster selon ton robot
+
+    Robot_Stop(robot);
+}
