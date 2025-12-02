@@ -52,3 +52,25 @@ L’alimentation est assurée par une **batterie NiMH 7.2 V**, et le robot intè
 ---
 
 ## Architecture du système global
+
+🧩 Architecture du système
+
+### 🧭 Diagramme fonctionnel
+![Diagramme d'architecture](images/diagramme_architecture.png)
+
+### ⚡ Architecture du PCB
+![Architecture PCB](images/pcb_architecture.png)
+
+### 🔌 Schéma électronique global
+![Schéma électronique](images/schema_global.png)
+
+---
+
+## 🔋 Alimentation et régulation
+Le robot est alimenté par une **batterie 7.2 V NiMH**.  
+Cette tension est régulée vers :
+- **5 V (MP1475S)** pour le LIDAR.  
+- **3.3 V (BU33SD5WG-TR)** pour le microcontrôleur, l’accéléromètre et les capteurs.
+
+```text
++7.2V → [BUCK 5V] → [BUCK 3.3V] → MCU + capteurs
