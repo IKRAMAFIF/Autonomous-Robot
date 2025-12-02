@@ -9,7 +9,7 @@ Il dispose de deux modes de fonctionnement :
 - **Mode Chat 🐱 :** le robot poursuit le robot adverse.  
 - **Mode Souris 🐭 :** le robot fuit le robot adverse.  
 
-L’alimentation est assurée par une **batterie NiMH 7.2 V**, et le robot intègre plusieurs capteurs tels qu’un **accéléromètre ADXL343**, un **LIDAR YDLIDAR X2**, et des **capteurs WS-MITV** pour la détection des bords.
+L’alimentation est assurée par une **batterie NiMH 7.2 V**, et le robot intègre plusieurs capteurs tels qu’un **accéléromètre ADXL343**, un **LIDAR YDLIDAR X2**, et des **capteurs mécaniques Würth MITV** pour la détection des bords et l’évitement des chutes.
 
 ---
 
@@ -36,7 +36,7 @@ L’architecture du système est organisée autour de cinq sous-ensembles princi
 Le robot est alimenté par une **batterie NiMH de 7.2 V – 1.3 Ah**, fournissant l’énergie à l’ensemble du système.  
 Deux régulateurs assurent la distribution des tensions :  
 - **MP1475S (5 V)** : alimentation du **LIDAR**.  
-- **BU33SD5WG-TR (3.3 V)** : alimentation du **STM32**, de l’**accéléromètre ADXL343** et des **capteurs WS-MITV**.  
+- **BU33SD5WG-TR (3.3 V)** : alimentation du **STM32**, de l’**accéléromètre ADXL343** et des **capteurs mécaniques MITV**.  
 
 Cette architecture garantit une alimentation stable et adaptée à chaque composant, tout en protégeant les circuits sensibles contre les variations de tension.
 
@@ -65,9 +65,10 @@ Le robot perçoit son environnement à l’aide de plusieurs capteurs complémen
 - **Accéléromètre ADXL343 :** détecte les **chocs, inclinaisons et vibrations**.  
   Il sert à repérer les collisions avec d’autres robots et a également été utilisé comme **arrêt d’urgence** lors des essais.  
 
-- **Capteurs WS-MITV :** montés à l’avant du robot, ces capteurs analogiques mesurent la **distance entre le robot et la surface de la table**.  
-  Une variation rapide de la tension de sortie signale l’absence de surface en dessous ; le microcontrôleur en déduit la **présence d’un bord** et déclenche une manœuvre d’évitement (recul ou rotation).  
-  Ce système assure la **sécurité du déplacement** et évite toute chute.
+- **Capteurs mécaniques Würth MITV 12.8x5.8 THT (240 gf)** : ces **capteurs à levier mécanique** sont positionnés à l’avant du robot.  
+  Lorsqu’un levier entre en contact avec le bord de la table, il déclenche un signal digital envoyé au STM32.  
+  Ce signal interrompt la tâche de déplacement et inverse la direction du robot pour éviter toute chute.  
+  Ce type de capteur est robuste, précis et réagit instantanément au contact, ce qui en fait une solution efficace pour la **détection de bordures** sur une table sans limites physiques.  
 
 ---
 
@@ -97,9 +98,9 @@ Cette interface simple permet une utilisation rapide et un suivi visuel du fonct
 #### 🧠 Fonctionnement global
 Lors de la mise sous tension, le **STM32** initialise tous les périphériques (UART, I²C, PWM, GPIO) et lance le **noyau FreeRTOS**.  
 Les tâches s’exécutent en parallèle :  
-- les **capteurs WS-MITV** surveillent les bords,  
+- les **capteurs mécaniques MITV** détectent physiquement les bords,  
 - le **LIDAR** balaie la zone et transmet les positions d’obstacles,  
-- l’**accéléromètre** détecte les collisions,  
+- l’**accéléromètre** surveille les collisions,  
 - et la logique logicielle choisit la réaction selon le mode actif.  
 
 En **mode Chat 🐱**, le robot analyse la position de son adversaire et se dirige vers lui.  
@@ -112,7 +113,9 @@ Cette coordination entre capteurs, actionneurs et logiciel embarqué confère au
 ✅ **En résumé**, le robot **CATRONIC** illustre un système embarqué complet combinant :
 - **conception électronique et routage PCB**,  
 - **programmation multitâche en temps réel**,  
-- **intégration de capteurs analogiques et numériques**,  
+- **intégration de capteurs mécaniques et numériques**,  
 - et **prise de décision autonome**.  
 
 Il représente une réalisation complète de la robotique embarquée : perception, décision et action.
+
+
