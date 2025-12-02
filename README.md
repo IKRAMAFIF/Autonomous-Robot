@@ -14,7 +14,7 @@ Il dispose de deux modes de fonctionnement :
 ## 🧩 Architecture du système global
 
 ### 🧭 Diagramme fonctionnel
-![Diagramme d'architecture](Images/diagramme_architecture.jpg)
+![Diagramme d'architecture](ProjetCatronic/Images/diagramme_architecture.jpg)
 
 ### 🧠 Description générale
 
