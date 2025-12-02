@@ -6,10 +6,8 @@ Les robots évoluent sur une **table sans bordures**, ils doivent donc être cap
 Le robot repose sur un **microcontrôleur STM32** et applique des **principes de systèmes temps réel** pour gérer la communication entre ses composants matériels et logiciels.  
 Il dispose de deux modes de fonctionnement :  
 
-- **Mode Chat 🐱 :** le robot poursuit le robot adverse.  
-- **Mode Souris 🐭 :** le robot fuit le robot adverse.  
-
-L’alimentation est assurée par une **batterie NiMH 7.2 V**, et le robot intègre plusieurs capteurs tels qu’un **accéléromètre ADXL343**, un **LIDAR YDLIDAR X2**, et des **capteurs mécaniques Würth MITV** pour la détection des bords et l’évitement des chutes.
+- **Mode Chat 🐱**   
+- **Mode Souris 🐭**  
 
 ---
 
@@ -65,7 +63,7 @@ Le robot perçoit son environnement à l’aide de plusieurs capteurs complémen
 - **Accéléromètre ADXL343 :** détecte les **chocs, inclinaisons et vibrations**.  
   Il sert à repérer les collisions avec d’autres robots et a également été utilisé comme **arrêt d’urgence** lors des essais.  
 
-- **Capteurs mécaniques Würth MITV 12.8x5.8 THT (240 gf)** : ces **capteurs à levier mécanique** sont positionnés à l’avant du robot.  
+- **Capteurs mécaniques Würth MITV** : ces **capteurs à levier mécanique** sont positionnés à l’avant du robot.  
   Lorsqu’un levier entre en contact avec le bord de la table, il déclenche un signal digital envoyé au STM32.  
   Ce signal interrompt la tâche de déplacement et inverse la direction du robot pour éviter toute chute.  
   Ce type de capteur est robuste, précis et réagit instantanément au contact, ce qui en fait une solution efficace pour la **détection de bordures** sur une table sans limites physiques.  
