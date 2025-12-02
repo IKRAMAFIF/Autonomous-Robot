@@ -14,7 +14,7 @@ Il dispose de deux modes de fonctionnement :
 ## 🧩 Architecture du système global
 
 ### 🧭 Diagramme fonctionnel
-![Diagramme d'architecture](images/diagramme_architecture.png)
+![Diagramme d'architecture](images/diagramme_architecture.jpg)
 
 ### 🧠 Description générale
 
