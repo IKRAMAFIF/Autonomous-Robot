@@ -1,0 +1,9 @@
+../Core/Inc/ADXL343_driver.h:58:21:ADXL343_RawTo_g	16	static
+../Core/Src/ADXL343_driver.c:6:26:adxl_write	32	static
+../Core/Src/ADXL343_driver.c:17:26:adxl_read	40	static
+../Core/Src/ADXL343_driver.c:30:9:ADXL343_Init	24	static
+../Core/Src/ADXL343_driver.c:53:9:ADXL343_ReadAxes	40	static
+../Core/Src/ADXL343_driver.c:69:19:ADXL343_ConfigShock	48	static
+../Core/Src/ADXL343_driver.c:104:9:ADXL343_CheckShock	24	static
+../Core/Src/ADXL343_driver.c:113:7:ADXL343_ComputeTotalG	24	static
+../Core/Src/ADXL343_driver.c:119:6:ADXL343_PrintAxes	112	static

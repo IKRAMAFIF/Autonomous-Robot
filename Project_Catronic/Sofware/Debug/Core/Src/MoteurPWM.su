@@ -1,0 +1,6 @@
+../Core/Src/MoteurPWM.c:9:6:Motor_Init	8	static
+../Core/Src/MoteurPWM.c:82:6:Motor_SetSpeed	24	static
+../Core/Src/MoteurPWM.c:142:6:Motor_Stop	16	static
+../Core/Src/MoteurPWM.c:147:6:Encoder_Reset	16	static
+../Core/Src/MoteurPWM.c:155:9:Encoder_GetCount	16	static
+../Core/Src/MoteurPWM.c:163:6:Motor_SetAngle	48	static
