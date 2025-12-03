@@ -1,0 +1,2 @@
+../Core/Src/border_sensors.c:5:9:BorderSensor_Read	16	static
+../Core/Src/border_sensors.c:10:19:BorderSensors_GetDirection	16	static

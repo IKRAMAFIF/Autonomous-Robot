@@ -1,0 +1,3 @@
+../Core/Src/ydlidar.c:26:6:ydlidar_init	8	static
+../Core/Src/ydlidar.c:33:6:ydlidar_process_data	24	static
+../Core/Src/ydlidar.c:90:13:decode_and_publish_packet	24	static

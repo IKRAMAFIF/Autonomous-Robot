@@ -26,6 +26,11 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "MoteurPWM.h"
+#include "drv_bt.h"
+#include "ADXL343_driver.h"
+#include "ydlidar.h"
+#include "border_sensors.h"
+#include <stdio.h>
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -49,6 +54,7 @@
 Moteur_HandleTypeDef moteurD;   // moteur droite
 Moteur_HandleTypeDef moteurG;   // moteur gauche
 h_Robot robot;
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -61,7 +67,7 @@ void SystemClock_Config(void);
 /* USER CODE BEGIN 0 */
 int __io_putchar(int ch)
 {
-    HAL_UART_Transmit(&huart1, (uint8_t*)&ch, 1, HAL_MAX_DELAY);
+    HAL_UART_Transmit(&huart4, (uint8_t*)&ch, 1, HAL_MAX_DELAY);
     return ch;
 }
 
@@ -105,43 +111,32 @@ int main(void)
   MX_USART3_UART_Init();
   MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
-
-	Moteur_init(&moteurD, &htim1, TIM_CHANNEL_1);   // Moteur droit sur CH1
+  /* Initialisation du Bluetooth */
+    BT_Init();
+    BT_SendString("BLE Ready\r\n");
+	/*Moteur_init(&moteurD, &htim1, TIM_CHANNEL_1);   // Moteur droit sur CH1
 	Moteur_init(&moteurG, &htim1, TIM_CHANNEL_2);   // Moteur gauche sur CH2
 
 	Robot_Init(&robot, &moteurD, &moteurG);
 
-	HAL_Delay(500); // petite pause
+	HAL_Delay(500);
 
-	// --------------------------------------------------------
-	// 1) AVANCER 2 SECONDES À 40%
-	// --------------------------------------------------------
 	Robot_Start(&robot, 40);
 	HAL_Delay(10000);
 
 	Robot_Stop(&robot);
 	HAL_Delay(2000);
 
-
-	// --------------------------------------------------------
-	// 2) ROTATION : TOURNE 90° À DROITE À 30%
-	// --------------------------------------------------------
 	Robot_setAngle(&robot, 90, 30);
 	HAL_Delay(1000);
 
-	// --------------------------------------------------------
-	// 3) ROTATION : TOURNE 90° À GAUCHE À 30%
-	// --------------------------------------------------------
 	Robot_setAngle(&robot, -90, 30);
 	HAL_Delay(1000);
 
-	// --------------------------------------------------------
-	// 4) RECULER 2 SECONDES À 35%
-	// --------------------------------------------------------
 	Robot_Recule(&robot, 35);
 	HAL_Delay(10000);
 
-	Robot_Stop(&robot);
+	Robot_Stop(&robot);*/
 
 
 	/****accelerometre**********
@@ -171,9 +166,34 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+
 	while (1)
 	{
+	    BorderDirection_t dir = BorderSensors_GetDirection();
 
+	    switch (dir)
+	    {
+	        case BORDER_FRONT:
+	            printf("Border FRONT detected\r\n");
+	            break;
+
+	        case BORDER_LEFT:
+	            printf("Border LEFT detected\r\n");
+	            break;
+
+	        case BORDER_RIGHT:
+	            printf("Border RIGHT detected\r\n");
+	            break;
+
+	        case BORDER_BACK:
+	            printf("Border BACK detected\r\n");
+	            break;
+
+	        default:
+	            break;
+	    }
+
+	    HAL_Delay(100);
 		/******accelerometre**********
 		//detection de choc
 		if (ADXL343_CheckShock(&hi2c1))
@@ -247,7 +267,14 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
-
+// BLE
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
+{
+    if (huart->Instance == USART3)  // Bluetooth
+    {
+        BT_UART_RxCpltCallback(BT_rxByte);
+    }
+}
 /* USER CODE END 4 */
 
 /**
