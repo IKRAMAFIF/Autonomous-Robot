@@ -2,9 +2,7 @@
 #include <math.h>
 #include <stdlib.h>
 
-// ---------------------------------------------------------
-// INITIALISATION MOTEUR
-// ---------------------------------------------------------
+
 void Moteur_init(Moteur_HandleTypeDef* moteur, TIM_HandleTypeDef* timer, uint32_t channel)
 {
     moteur->pwm_timer = timer;
@@ -16,9 +14,7 @@ void Moteur_init(Moteur_HandleTypeDef* moteur, TIM_HandleTypeDef* timer, uint32_
     HAL_TIMEx_PWMN_Stop(timer, channel);
 }
 
-// ---------------------------------------------------------
-// DEFINIR LA VITESSE EN %
-// ---------------------------------------------------------
+
 void Moteur_setSpeed(Moteur_HandleTypeDef* moteur, int percent)
 {
     if (percent > 100)  percent = 100;
@@ -45,9 +41,7 @@ void Moteur_setSpeed(Moteur_HandleTypeDef* moteur, int percent)
     }
 }
 
-// ---------------------------------------------------------
-// DIRECTION
-// ---------------------------------------------------------
+
 void Moteur_setDirection(Moteur_HandleTypeDef* moteur, char direction)
 {
     moteur->direction = direction;
@@ -73,18 +67,14 @@ void Moteur_setDirection(Moteur_HandleTypeDef* moteur, char direction)
     }
 }
 
-// ---------------------------------------------------------
-// STOP
-// ---------------------------------------------------------
+
 void Moteur_stop(Moteur_HandleTypeDef* moteur)
 {
     Moteur_setDirection(moteur, MOTEUR_STOP);
     __HAL_TIM_SET_COMPARE(moteur->pwm_timer, moteur->channel, 0);
 }
 
-// ---------------------------------------------------------
-// ROBOT INIT
-// ---------------------------------------------------------
+
 void Robot_Init(h_Robot* robot, Moteur_HandleTypeDef* moteurD, Moteur_HandleTypeDef* moteurG)
 {
     robot->moteur_droite = moteurD;
@@ -96,29 +86,25 @@ void Robot_Init(h_Robot* robot, Moteur_HandleTypeDef* moteurD, Moteur_HandleType
     robot->direction = MOTEUR_STOP;
 }
 
-// ---------------------------------------------------------
+
 // AVANCER
-// ---------------------------------------------------------
 void Robot_Start(h_Robot* robot, int vitesse_percent)
 {
-    Moteur_setSpeed(robot->moteur_droite, vitesse_percent);
-    Moteur_setSpeed(robot->moteur_gauche, vitesse_percent);
+    Moteur_setSpeed(robot->moteur_droite,   vitesse_percent);
+    Moteur_setSpeed(robot->moteur_gauche,  -vitesse_percent);
     robot->direction = MOTEUR_AVANCER;
 }
 
-// ---------------------------------------------------------
+
 // RECULER
-// ---------------------------------------------------------
 void Robot_Recule(h_Robot* robot, int vitesse_percent)
 {
     Moteur_setSpeed(robot->moteur_droite, -vitesse_percent);
-    Moteur_setSpeed(robot->moteur_gauche, -vitesse_percent);
+    Moteur_setSpeed(robot->moteur_gauche,  vitesse_percent);
     robot->direction = MOTEUR_RECULER;
 }
 
-// ---------------------------------------------------------
-// STOP
-// ---------------------------------------------------------
+
 void Robot_Stop(h_Robot* robot)
 {
     Moteur_stop(robot->moteur_droite);
@@ -126,10 +112,8 @@ void Robot_Stop(h_Robot* robot)
     robot->direction = MOTEUR_STOP;
 }
 
-// ---------------------------------------------------------
-// ROTATION SIMPLE (stable et propre)
-// ---------------------------------------------------------
 
+// ROTATION
 void Robot_setAngle(h_Robot* robot, float angle_deg, int vitesse_percent)
 {
     float direction = (angle_deg > 0) ? 1 : -1;

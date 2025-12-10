@@ -18,6 +18,7 @@
 /* USER CODE END Header */
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
+#include "cmsis_os.h"
 #include "i2c.h"
 #include "tim.h"
 #include "usart.h"
@@ -30,6 +31,7 @@
 #include "ADXL343_driver.h"
 #include "ydlidar.h"
 #include "border_sensors.h"
+#include "robot_logic.h"
 #include <stdio.h>
 /* USER CODE END Includes */
 
@@ -51,14 +53,16 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-Moteur_HandleTypeDef moteurD;   // moteur droite
-Moteur_HandleTypeDef moteurG;   // moteur gauche
-h_Robot robot;
+Moteur_HandleTypeDef moteurD;
+Moteur_HandleTypeDef moteurG;
+h_Robot hrob;
 
+SemaphoreHandle_t mutexSensors;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
 void SystemClock_Config(void);
+void MX_FREERTOS_Init(void);
 /* USER CODE BEGIN PFP */
 
 /* USER CODE END PFP */
@@ -67,8 +71,8 @@ void SystemClock_Config(void);
 /* USER CODE BEGIN 0 */
 int __io_putchar(int ch)
 {
-    HAL_UART_Transmit(&huart4, (uint8_t*)&ch, 1, HAL_MAX_DELAY);
-    return ch;
+	HAL_UART_Transmit(&huart4, (uint8_t*)&ch, 1, HAL_MAX_DELAY);
+	return ch;
 }
 
 /* USER CODE END 0 */
@@ -111,114 +115,51 @@ int main(void)
   MX_USART3_UART_Init();
   MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
-  /* Initialisation du Bluetooth */
-    BT_Init();
-    BT_SendString("BLE Ready\r\n");
-	/*Moteur_init(&moteurD, &htim1, TIM_CHANNEL_1);   // Moteur droit sur CH1
-	Moteur_init(&moteurG, &htim1, TIM_CHANNEL_2);   // Moteur gauche sur CH2
 
-	Robot_Init(&robot, &moteurD, &moteurG);
+  Moteur_init(&moteurD, &htim1, TIM_CHANNEL_1);
+  Moteur_init(&moteurG, &htim1, TIM_CHANNEL_2);
 
-	HAL_Delay(500);
+  Robot_Init(&hrob, &moteurD, &moteurG);
+  printf("Robot Init OK\r\n");
 
-	Robot_Start(&robot, 40);
-	HAL_Delay(10000);
+  mutexSensors = xSemaphoreCreateMutex();
+  if (mutexSensors == NULL)
+  {
+      printf("Erreur Mutex !\r\n");
+      while(1);
+  }
+   //TEST tasks
+   xTaskCreate(BorderTask, "Border", 256, NULL, 3, NULL);
+   xTaskCreate(ShockTask, "Shock", 256, NULL, 2, NULL);
 
-	Robot_Stop(&robot);
-	HAL_Delay(2000);
-
-	Robot_setAngle(&robot, 90, 30);
-	HAL_Delay(1000);
-
-	Robot_setAngle(&robot, -90, 30);
-	HAL_Delay(1000);
-
-	Robot_Recule(&robot, 35);
-	HAL_Delay(10000);
-
-	Robot_Stop(&robot);*/
+   printf("Taches FreeRTOS creees.\r\n");
+   vTaskStartScheduler();
 
 
-	/****accelerometre**********
-    printf("\r\n accelerometre test \r\n");
+	/* Initialisation du Bluetooth
+	BT_Init();
+	BT_SendString("BLE Ready\r\n");*/
 
-	HAL_StatusTypeDef ret;
-
-	ret = ADXL343_Init(&hi2c1);
-	if (ret != HAL_OK) {
-		printf("ADXL343_Init ERROR !\r\n");
-	} else {
-		printf("ADXL343_Init OK\r\n");
-	}
-
-	ret =  ADXL343_ConfigShock(&hi2c1, 0.3f, 50.0f);
-	if (ret != HAL_OK) {
-		printf("ADXL343_ConfigShock ERROR !\r\n");
-	} else {
-		printf("ADXL343_ConfigShock OK\r\n");
-	}
-
-	HAL_GPIO_WritePin(LED_ST1_GPIO_Port, LED_ST1_Pin, GPIO_PIN_RESET);
-	HAL_GPIO_WritePin(LED_ST2_GPIO_Port, LED_ST2_Pin, GPIO_PIN_RESET);
-	HAL_GPIO_WritePin(LED_ST3_GPIO_Port, LED_ST3_Pin, GPIO_PIN_RESET); */
 
   /* USER CODE END 2 */
+
+  /* Init scheduler */
+  osKernelInitialize();
+
+  /* Call init function for freertos objects (in cmsis_os2.c) */
+  MX_FREERTOS_Init();
+
+  /* Start scheduler */
+  osKernelStart();
+
+  /* We should never get here as control is now taken by the scheduler */
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
 
 	while (1)
 	{
-	    BorderDirection_t dir = BorderSensors_GetDirection();
 
-	    switch (dir)
-	    {
-	        case BORDER_FRONT:
-	            printf("Border FRONT detected\r\n");
-	            break;
-
-	        case BORDER_LEFT:
-	            printf("Border LEFT detected\r\n");
-	            break;
-
-	        case BORDER_RIGHT:
-	            printf("Border RIGHT detected\r\n");
-	            break;
-
-	        case BORDER_BACK:
-	            printf("Border BACK detected\r\n");
-	            break;
-
-	        default:
-	            break;
-	    }
-
-	    HAL_Delay(100);
-		/******accelerometre**********
-		//detection de choc
-		if (ADXL343_CheckShock(&hi2c1))
-		{
-			//si il y a un choc la led status clignote
-			HAL_GPIO_WritePin(LED_ST1_GPIO_Port, LED_ST1_Pin, GPIO_PIN_SET);
-			HAL_GPIO_WritePin(LED_ST2_GPIO_Port, LED_ST2_Pin, GPIO_PIN_SET);
-			HAL_GPIO_WritePin(LED_ST3_GPIO_Port, LED_ST3_Pin, GPIO_PIN_SET);
-			HAL_Delay(100);
-			HAL_GPIO_WritePin(LED_ST1_GPIO_Port, LED_ST1_Pin, GPIO_PIN_RESET);
-			HAL_GPIO_WritePin(LED_ST2_GPIO_Port, LED_ST2_Pin, GPIO_PIN_RESET);
-			HAL_GPIO_WritePin(LED_ST3_GPIO_Port, LED_ST3_Pin, GPIO_PIN_RESET);
-		}
-		// afficher les resultats sur terminal
-		ADXL343_PrintAxes(&hi2c1);
-
-		// POUR LA PARTIE DE CHANGEMENT DE MODE ( ON LA TERMINER ULTERIEUREMENT)
-		if (ADXL343_CheckShock(&hi2c1))
-		{
-			printf("Choc détecté ! Changement de mode...\r\n");
-			// ON PEUT APPEER LA FONCTION QUI CHANGE LE MODE DU ROBOT ICI
-		}
-
-		HAL_Delay(100);
-		 */
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -270,10 +211,10 @@ void SystemClock_Config(void)
 // BLE
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 {
-    if (huart->Instance == USART3)  // Bluetooth
-    {
-        BT_UART_RxCpltCallback(BT_rxByte);
-    }
+	if (huart->Instance == USART3)  // Bluetooth
+	{
+		BT_UART_RxCpltCallback(BT_rxByte);
+	}
 }
 /* USER CODE END 4 */
 

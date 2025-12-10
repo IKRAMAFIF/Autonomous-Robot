@@ -12,11 +12,11 @@ typedef struct
 } BorderStatus_t;
 
 typedef enum {
-    BORDER_NONE    = 0,
-    BORDER_FRONT   = 1,
-    BORDER_LEFT    = 2,
-    BORDER_RIGHT   = 3,
-    BORDER_BACK    = 4
+    BORDER_NONE = 0,
+    BORDER_AVANT_GAUCHE,
+    BORDER_AVANT_DROITE,
+    BORDER_ARRIERE_GAUCHE,
+    BORDER_ARRIERE_DROITE
 } BorderDirection_t;
 
 uint8_t BorderSensor_Read(GPIO_TypeDef* PORT, uint16_t PIN);
@@ -24,3 +24,4 @@ BorderStatus_t BorderSensors_ReadAll(void);
 BorderDirection_t BorderSensors_GetDirection(void);
 
 #endif
+
