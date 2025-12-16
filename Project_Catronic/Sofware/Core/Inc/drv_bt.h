@@ -1,19 +1,19 @@
-#ifndef DRV_BT_H
-#define DRV_BT_H
+#ifndef INC_DRV_BT_H_
+#define INC_DRV_BT_H_
 
 #include "stm32g4xx_hal.h"
-#include <string.h>
+#include <stdint.h>
 
-#define BT_RX_BUF_SIZE 100
+#define BT_RX_BUF_SIZE 64
 
-extern UART_HandleTypeDef huart3;
-
+/* ===== Variables globales Bluetooth ===== */
 extern uint8_t  BT_rxByte;
-extern char     BT_rxBuffer[BT_RX_BUF_SIZE];
-extern uint16_t BT_rxIndex;
+extern char     BT_cmd[BT_RX_BUF_SIZE];
+extern uint8_t  BT_cmdReady;
 
+/* ===== Fonctions ===== */
 void BT_Init(void);
 void BT_SendString(char *s);
 void BT_UART_RxCpltCallback(uint8_t c);
 
-#endif
+#endif /* INC_DRV_BT_H_ */

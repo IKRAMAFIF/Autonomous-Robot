@@ -40,6 +40,8 @@
 #define ADXL_INT_DATA_READY     (1 << 7)
 #define ADXL_INT_SINGLE_TAP     (1 << 6)
 
+
+
 typedef struct
 {
 	int16_t x;

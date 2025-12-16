@@ -11,58 +11,35 @@
 #include <string.h>
 #include <stdio.h>
 
+
 extern SemaphoreHandle_t mutexSensors;
 extern I2C_HandleTypeDef hi2c1;
 extern h_Robot hrob;
+
+
 uint8_t shock_detected = 0;
+uint8_t border_active = 0;
 BorderDirection_t border_dir = BORDER_NONE;
+RobotMode_t robot_mode = ROBOT_STOP;
+
 
 void BorderTask(void *argument)
 {
-    for(;;)
+    printf("BorderTask STARTED\r\n");
+
+    for (;;)
     {
-        BorderDirection_t d = BorderSensors_GetDirection();
+BorderDirection_t d = BorderSensors_GetDirection();
 
         xSemaphoreTake(mutexSensors, portMAX_DELAY);
         border_dir = d;
+        border_active = (d != BORDER_NONE);
         xSemaphoreGive(mutexSensors);
 
-        switch(d)
-        {
-            case BORDER_AVANT_GAUCHE: // PA0 - capteur3
-                printf("Avant Gauche detecte → Recule\r\n");
-                Robot_Recule(&hrob, 40);
-                vTaskDelay(pdMS_TO_TICKS(100));
-                Robot_Stop(&hrob);
-                break;
+        if (d != BORDER_NONE)
+            printf("BORDER DETECTED: %d\r\n", d);
 
-            case BORDER_AVANT_DROITE: // PA1 - capteur2
-                printf("Avant Droite detecte → Recule\r\n");
-                Robot_Recule(&hrob, 40);
-                vTaskDelay(pdMS_TO_TICKS(100));
-                Robot_Stop(&hrob);
-                break;
-
-            case BORDER_ARRIERE_GAUCHE: // PA4 - capteur4
-                printf("Arrière Gauche detecte → Avance\r\n");
-                Robot_Start(&hrob, 40);
-                vTaskDelay(pdMS_TO_TICKS(100));
-                Robot_Stop(&hrob);
-                break;
-
-            case BORDER_ARRIERE_DROITE: // PA5 - capteur1
-                printf("Arrière Droite detecte → Avance\r\n");
-                Robot_Start(&hrob, 40);
-                vTaskDelay(pdMS_TO_TICKS(100));
-                Robot_Stop(&hrob);
-                break;
-
-            case BORDER_NONE:
-            default:
-                break;
-        }
-
-        vTaskDelay(pdMS_TO_TICKS(50));
+        vTaskDelay(pdMS_TO_TICKS(100));
     }
 }
 
@@ -70,39 +47,38 @@ void BorderTask(void *argument)
 
 void ShockTask(void *argument)
 {
-    printf("\r\n accelerometre (FreeRTOS) \r\n");
-
     HAL_StatusTypeDef ret;
 
     ret = ADXL343_Init(&hi2c1);
-    if (ret != HAL_OK) {
-        printf("ADXL343_Init ERROR !\r\n");
-    } else {
-        printf("ADXL343_Init OK\r\n");
-    }
-
     ret = ADXL343_ConfigShock(&hi2c1, 0.3f, 50.0f);
-    if (ret != HAL_OK) {
-        printf("ADXL343_ConfigShock ERROR !\r\n");
-    } else {
-        printf("ADXL343_ConfigShock OK\r\n");
-    }
 
-
-    //LIRE CHOC + LED
-    for(;;)
+    for (;;)
     {
-        if (ADXL343_CheckShock(&hi2c1) == 1)
+        if (ADXL343_CheckShock(&hi2c1))
         {
-            printf(" CHOC détecté !\r\n");
-
+        	printf("choc detecte\r\n");
             xSemaphoreTake(mutexSensors, portMAX_DELAY);
-            shock_detected = 1;
+            if (robot_mode != ROBOT_STOP)
+            {
+                shock_detected = 1;
+
+                if (robot_mode == ROBOT_MODE_CHAT)
+                {
+                    robot_mode = ROBOT_MODE_SOURIS;
+                    BT_SendString("Mode auto -> SOURIS\r\n");
+                    printf("Mode auto -> SOURIS\r\n");
+                }
+                else if (robot_mode == ROBOT_MODE_SOURIS)
+                {
+                    robot_mode = ROBOT_MODE_CHAT;
+                    BT_SendString("Mode auto -> CHAT\r\n");
+                    printf("Mode auto -> CHAT\r\n");
+                }
+            }
+
             xSemaphoreGive(mutexSensors);
 
-            HAL_GPIO_WritePin(LED_ST1_GPIO_Port, LED_ST1_Pin, GPIO_PIN_SET);
-            vTaskDelay(pdMS_TO_TICKS(200));
-            HAL_GPIO_WritePin(LED_ST1_GPIO_Port, LED_ST1_Pin, GPIO_PIN_RESET);
+            vTaskDelay(pdMS_TO_TICKS(300)); // anti-rebond
         }
 
         vTaskDelay(pdMS_TO_TICKS(50));
@@ -110,6 +86,111 @@ void ShockTask(void *argument)
 }
 
 
+void BluetoothTask(void *argument)
+{
+    for (;;)
+    {
+        if (BT_cmdReady)
+        {
+            BT_cmdReady = 0;
+
+            xSemaphoreTake(mutexSensors, portMAX_DELAY);
+
+            if (strcmp(BT_cmd, "STOP") == 0)
+            {
+                robot_mode = ROBOT_STOP;
+                BT_SendString("Robot STOP\r\n");
+                printf("Robot STOP\r\n");
+            }
+            else if (strcmp(BT_cmd, "START") == 0)
+            {
+                robot_mode = ROBOT_MODE_CHAT;
+                BT_SendString("Robot START -> CHAT\r\n");
+                printf("Robot START -> CHAT\r\n");
+            }
+            else if (strcmp(BT_cmd, "CHAT") == 0)
+            {
+                robot_mode = ROBOT_MODE_CHAT;
+                BT_SendString("Mode -> CHAT\r\n");
+                printf("Mode -> CHAT\r\n");
+            }
+            else if (strcmp(BT_cmd, "SOURIS") == 0)
+            {
+                robot_mode = ROBOT_MODE_SOURIS;
+                BT_SendString("Mode -> SOURIS\r\n");
+                printf("Mode -> SOURIS\r\n");
+            }
+            else if (strcmp(BT_cmd, "STATUS") == 0)
+            {
+                if (robot_mode == ROBOT_MODE_CHAT)
+                    BT_SendString("STATUS: CHAT\r\n");
+
+                else if (robot_mode == ROBOT_MODE_SOURIS)
+                    BT_SendString("STATUS: SOURIS\r\n");
+
+                else
+                    BT_SendString("STATUS: STOP\r\n");
+            }
+            else
+            {
+                BT_SendString("Commande inconnue\r\n");
+            }
+
+            memset(BT_cmd, 0, sizeof(BT_cmd));
+            xSemaphoreGive(mutexSensors);
+        }
+
+        vTaskDelay(pdMS_TO_TICKS(20));
+    }
+}
 
 
+void RobotModeTask(void *argument)
+{
+    for (;;)
+    {
+        RobotMode_t mode;
+        BorderDirection_t d;
+        uint8_t b_active;
 
+        xSemaphoreTake(mutexSensors, portMAX_DELAY);
+        mode = robot_mode;
+        d = border_dir;
+        b_active = border_active;
+        xSemaphoreGive(mutexSensors);
+
+        if (mode == ROBOT_STOP)
+        {
+            Robot_Stop(&hrob);
+        }
+        else if (b_active)
+        {
+            // Sécurité bordure PRIORITAIRE
+            if (d == BORDER_AVANT_GAUCHE || d == BORDER_AVANT_DROITE)
+            {
+                Robot_Recule(&hrob, 15);
+                vTaskDelay(pdMS_TO_TICKS(100));
+            }
+            else if (d == BORDER_ARRIERE_GAUCHE || d == BORDER_ARRIERE_DROITE)
+            {
+                Robot_Start(&hrob, 15);
+                vTaskDelay(pdMS_TO_TICKS(100));
+            }
+            Robot_Stop(&hrob);
+        }
+        else if (mode == ROBOT_MODE_CHAT)
+        {
+            //Robot_Start(&hrob, 30);
+            BT_SendString("avance chat\r\n");
+            printf("avance chat\r\n");
+        }
+        else if (mode == ROBOT_MODE_SOURIS)
+        {
+            //Robot_Recule(&hrob, 30);
+        	BT_SendString("avance souris\r\n");
+        	printf("avance souris\r\n");
+        }
+
+        vTaskDelay(pdMS_TO_TICKS(80));
+    }
+}

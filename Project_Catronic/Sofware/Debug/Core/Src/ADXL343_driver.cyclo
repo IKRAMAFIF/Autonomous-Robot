@@ -1,4 +1,4 @@
-../Core/Inc/ADXL343_driver.h:58:21:ADXL343_RawTo_g	1
+../Core/Inc/ADXL343_driver.h:60:21:ADXL343_RawTo_g	1
 ../Core/Src/ADXL343_driver.c:6:26:adxl_write	1
 ../Core/Src/ADXL343_driver.c:17:26:adxl_read	1
 ../Core/Src/ADXL343_driver.c:30:9:ADXL343_Init	6

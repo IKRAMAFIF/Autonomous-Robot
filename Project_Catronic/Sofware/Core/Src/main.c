@@ -116,6 +116,10 @@ int main(void)
   MX_USART1_UART_Init();
   /* USER CODE BEGIN 2 */
 
+//Initialisation du Bluetooth
+  BT_Init();
+  BT_SendString("BLE Ready\r\n");
+
   Moteur_init(&moteurD, &htim1, TIM_CHANNEL_1);
   Moteur_init(&moteurG, &htim1, TIM_CHANNEL_2);
 
@@ -129,16 +133,15 @@ int main(void)
       while(1);
   }
    //TEST tasks
-   xTaskCreate(BorderTask, "Border", 256, NULL, 3, NULL);
-   xTaskCreate(ShockTask, "Shock", 256, NULL, 2, NULL);
+   xTaskCreate(BluetoothTask, "BT", 256, NULL, 5, NULL);
+   xTaskCreate(ShockTask,     "Shock", 256, NULL, 4, NULL);
+   xTaskCreate(BorderTask,    "Border", 256, NULL, 3, NULL);
+   xTaskCreate(RobotModeTask, "Mode", 256, NULL, 2, NULL);
 
    printf("Taches FreeRTOS creees.\r\n");
    vTaskStartScheduler();
 
 
-	/* Initialisation du Bluetooth
-	BT_Init();
-	BT_SendString("BLE Ready\r\n");*/
 
 
   /* USER CODE END 2 */

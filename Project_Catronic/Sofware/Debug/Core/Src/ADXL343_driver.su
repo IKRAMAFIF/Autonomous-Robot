@@ -1,4 +1,4 @@
-../Core/Inc/ADXL343_driver.h:58:21:ADXL343_RawTo_g	16	static
+../Core/Inc/ADXL343_driver.h:60:21:ADXL343_RawTo_g	16	static
 ../Core/Src/ADXL343_driver.c:6:26:adxl_write	32	static
 ../Core/Src/ADXL343_driver.c:17:26:adxl_read	40	static
 ../Core/Src/ADXL343_driver.c:30:9:ADXL343_Init	24	static
