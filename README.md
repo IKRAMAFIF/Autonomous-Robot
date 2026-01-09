@@ -1,19 +1,14 @@
 ##  Introduction
 
-Le projet **CATRONIC** consiste à développer un robot autonome capable de jouer au chat et à la souris avec d’autres robots du même type.  
+Le robot **CATRONIC** est un système embarqué autonome conçu pour simuler un jeu de **chat et de souris** entre plusieurs robots identiques. 
 Les robots évoluent sur une table sans bordures, ils doivent donc être capables de détecter les bords afin d’éviter toute chute.
 
-Le robot repose sur un **microcontrôleur STM32** et applique des **principes de systèmes temps réel** pour gérer la communication entre ses composants matériels et logiciels.  
 
 ##  Architecture du système global
 
 ###  Diagramme fonctionnel
 ![Diagramme d'architecture](Project_Catronic/Images/diagramme_architecture.jpg)
 
-###  Description générale
-
-Le robot **CATRONIC** est un système embarqué autonome conçu pour simuler un jeu de **chat et de souris** entre plusieurs robots identiques.  
-Chaque robot interagit avec son environnement grâce à un ensemble de capteurs et d’actionneurs coordonnés par un **microcontrôleur STM32G431CBU6**.  
 
 L’architecture du système est organisée autour de cinq sous-ensembles principaux :  
 1. **L’alimentation**,  
