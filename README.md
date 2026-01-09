@@ -1,6 +1,6 @@
 ##  Introduction
 
-Le robot **CATRONIC** est un système embarqué autonome conçu pour simuler un jeu de **chat et de souris** entre plusieurs robots identiques. 
+Le robot **CATRONIC** est un système embarqué autonome conçu pour simuler un jeu de chat et de souris entre plusieurs robots identiques. 
 Les robots évoluent sur une table sans bordures, ils doivent donc être capables de détecter les bords afin d’éviter toute chute.
 
 
