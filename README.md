@@ -1,6 +1,6 @@
 # Projet CATRONIC : Robot Autonome "Chat et Souris"
 
-> **Auteurs :** [Noms des membres du groupe à insérer ici]
+> **Auteurs :** AFIF Ikram, AIT ALLA Hajar, MENJLI Fakhri
 
 Le robot **CATRONIC** est un système embarqué autonome conçu pour simuler un jeu de chat et de souris entre plusieurs robots identiques. Les robots évoluent sur une table sans bordures et sont capables de détecter les bords pour éviter toute chute.
 
@@ -59,12 +59,14 @@ Le cerveau est un **STM32G431CBU6** (ARM Cortex-M4) qui exécute le code applica
 #### Acquisition
 Ce sous-système regroupe tous les capteurs qui permettent au robot de percevoir son environnement.
 
-| Schéma des capteurs | Photo des capteurs |
-| :---: | :---: |
-| ![Schéma des capteurs](Project_Catronic/Images/Schéma_capteurs.jpg) | ![Capteurs mécaniques](Project_Catronic/Images/sensors.jpg) |
+![Schéma des capteurs (sensors)](Project_Catronic/Images/sensors.jpg)
+*Aperçu des capteurs de détection.*
 
 #### Déplacement
 Deux moteurs DC avec drivers **ZXBM5210-SP-13** permettent un contrôle fin de la vitesse et de la direction (contrôle différentiel) via des signaux PWM.
+
+![Schéma des actionneurs](Project_Catronic/Images/Schéma_capteurs.jpg)
+*Schéma des actionneurs (moteurs et drivers).*
 
 #### Interface Utilisateur
 Elle se compose d'un interrupteur, d'un bouton de démarrage, d'une LED de statut et d'un connecteur de débogage SWD.
@@ -136,6 +138,10 @@ Décrivez ici les tests que vous avez effectués pour chaque sous-système.
 ### Test du LIDAR et de la logique de jeu
 - La détection du robot adverse est-elle fiable ?
 - Le robot suit-il (Chat) ou fuit-il (Souris) correctement ?
+
+![Test du LIDAR avec Tera Term](Project_Catronic/Images/test_lidar.jpg)
+*Capture d'écran de Tera Term montrant les données du LIDAR pour la détection d'obstacles.*
+
 - *(Ajoutez des vidéos ou des images des tests)*
 
 ---
