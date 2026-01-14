@@ -7,7 +7,7 @@ Les robots évoluent sur une table sans bordures, ils doivent donc être capable
 ##  Architecture du système global
 
 ###  Diagramme fonctionnel
-![Diagramme d'architecture](Project_Catronic/Images/diagramme_architecture.jpg)
+![Diagramme d'architecture](Project_Catronic/Images/diagramme_architecture.png)
 
 
 L’architecture du système est organisée autour de cinq sous-ensembles principaux :  
