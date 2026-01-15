@@ -10,7 +10,7 @@
 #include "semphr.h"
 #include <string.h>
 #include <stdio.h>
-
+#include "main.h"
 
 extern SemaphoreHandle_t mutexSensors;
 extern I2C_HandleTypeDef hi2c1;
@@ -146,7 +146,8 @@ void BluetoothTask(void *argument)
 
 
 void RobotModeTask(void *argument)
-{
+{extern Moteur_HandleTypeDef moteurD;
+extern Moteur_HandleTypeDef moteurG;
     for (;;)
     {
         RobotMode_t mode;
@@ -169,26 +170,40 @@ void RobotModeTask(void *argument)
             if (d == BORDER_AVANT_GAUCHE || d == BORDER_AVANT_DROITE)
             {
                 Robot_Recule(&hrob, 15);
+                vTaskDelay(pdMS_TO_TICKS(600));
+                Moteur_setSpeed(&moteurG, 5);
+                vTaskDelay(pdMS_TO_TICKS(700));
+                Robot_Stop(&hrob);
                 vTaskDelay(pdMS_TO_TICKS(100));
+
+
+
             }
             else if (d == BORDER_ARRIERE_GAUCHE || d == BORDER_ARRIERE_DROITE)
             {
                 Robot_Start(&hrob, 15);
+                vTaskDelay(pdMS_TO_TICKS(600));
+                Moteur_setSpeed(&moteurG, 5);
+                vTaskDelay(pdMS_TO_TICKS(700));
+                Robot_Stop(&hrob);
                 vTaskDelay(pdMS_TO_TICKS(100));
             }
-            Robot_Stop(&hrob);
         }
         else if (mode == ROBOT_MODE_CHAT)
         {
-            //Robot_Start(&hrob, 30);
+
             BT_SendString("avance chat\r\n");
             printf("avance chat\r\n");
+       Robot_Start(&hrob, 17);
+
         }
         else if (mode == ROBOT_MODE_SOURIS)
         {
-            //Robot_Recule(&hrob, 30);
+
         	BT_SendString("avance souris\r\n");
         	printf("avance souris\r\n");
+            Robot_Start(&hrob, 17);
+
         }
 
         vTaskDelay(pdMS_TO_TICKS(80));

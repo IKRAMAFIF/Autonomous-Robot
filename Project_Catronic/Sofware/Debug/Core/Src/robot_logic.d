@@ -47,7 +47,7 @@ Core/Src/robot_logic.o: ../Core/Src/robot_logic.c \
  ../Core/Inc/main.h ../Core/Inc/ydlidar.h ../Core/Inc/MoteurPWM.h \
  ../Core/Inc/tim.h ../Core/Inc/border_sensors.h ../Core/Inc/drv_bt.h \
  ../Core/Inc/ADXL343_driver.h ../Core/Inc/ydlidar.h \
- ../Core/Inc/MoteurPWM.h
+ ../Core/Inc/MoteurPWM.h ../Core/Inc/main.h
 ../Core/Inc/robot_logic.h:
 ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h:
 ../Core/Inc/FreeRTOSConfig.h:
@@ -104,3 +104,4 @@ Core/Src/robot_logic.o: ../Core/Src/robot_logic.c \
 ../Core/Inc/ADXL343_driver.h:
 ../Core/Inc/ydlidar.h:
 ../Core/Inc/MoteurPWM.h:
+../Core/Inc/main.h:

@@ -133,10 +133,10 @@ int main(void)
       while(1);
   }
    //TEST tasks
-   xTaskCreate(BluetoothTask, "BT", 256, NULL, 5, NULL);
-   xTaskCreate(ShockTask,     "Shock", 256, NULL, 4, NULL);
-   xTaskCreate(BorderTask,    "Border", 256, NULL, 3, NULL);
-   xTaskCreate(RobotModeTask, "Mode", 256, NULL, 2, NULL);
+   xTaskCreate(BluetoothTask, "BT", 128, NULL, 5, NULL);
+   xTaskCreate(ShockTask,     "Shock", 128, NULL, 4, NULL);
+   xTaskCreate(BorderTask,    "Border", 128, NULL, 3, NULL);
+   xTaskCreate(RobotModeTask, "Mode", 128, NULL, 2, NULL);
 
    printf("Taches FreeRTOS creees.\r\n");
    vTaskStartScheduler();
