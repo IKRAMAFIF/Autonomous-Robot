@@ -113,17 +113,4 @@ void Robot_Stop(h_Robot* robot)
 }
 
 
-// ROTATION
-void Robot_setAngle(h_Robot* robot, float angle_deg, int vitesse_percent)
-{
-    float direction = (angle_deg > 0) ? 1 : -1;
 
-    // moteur gauche avance, moteur droite recule (ou inverse selon ton montage)
-    Moteur_setSpeed(robot->moteur_gauche,  vitesse_percent * direction);
-    Moteur_setSpeed(robot->moteur_droite, -vitesse_percent * direction);
-
-    HAL_Delay((int)(fabs(angle_deg) * 8));
-    // ← 8 ms par degré → à ajuster selon ton robot
-
-    Robot_Stop(robot);
-}

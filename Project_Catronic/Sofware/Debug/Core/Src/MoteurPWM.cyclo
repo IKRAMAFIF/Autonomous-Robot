@@ -6,4 +6,3 @@
 ../Core/Src/MoteurPWM.c:91:6:Robot_Start	1
 ../Core/Src/MoteurPWM.c:100:6:Robot_Recule	1
 ../Core/Src/MoteurPWM.c:108:6:Robot_Stop	1
-../Core/Src/MoteurPWM.c:117:6:Robot_setAngle	2

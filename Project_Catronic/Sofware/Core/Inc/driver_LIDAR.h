@@ -17,21 +17,21 @@
 /* ================= STRUCTURES ================= */
 
 typedef struct {
-    float angle;
-    uint16_t distance;
+	float angle;
+	uint16_t distance;
 } LIDAR_Point_t;
 
 typedef struct {
-    uint8_t fifo[LIDAR_FIFO_SIZE];
-    volatile uint16_t head;
-    volatile uint16_t tail;
+	uint8_t fifo[LIDAR_FIFO_SIZE];
+	volatile uint16_t head;
+	volatile uint16_t tail;
 } LIDAR_FIFO_t;
 
 typedef struct {
-    uint8_t packet[256];
-    uint16_t packet_index;
-    uint8_t sample_quantity;
-    LIDAR_Point_t points[MAX_SAMPLES];
+	uint8_t packet[256];
+	uint16_t packet_index;
+	uint8_t sample_quantity;
+	LIDAR_Point_t points[MAX_SAMPLES];
 } h_YLIDARX2_t;
 
 /* ================= API ================= */
