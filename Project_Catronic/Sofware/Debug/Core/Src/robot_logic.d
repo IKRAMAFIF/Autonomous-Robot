@@ -44,9 +44,9 @@ Core/Src/robot_logic.o: ../Core/Src/robot_logic.c \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart.h \
  ../Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_uart_ex.h \
  ../Core/Inc/border_sensors.h ../Core/Inc/ADXL343_driver.h \
- ../Core/Inc/main.h ../Core/Inc/ydlidar.h ../Core/Inc/MoteurPWM.h \
+ ../Core/Inc/main.h ../Core/Inc/driver_LIDAR.h ../Core/Inc/MoteurPWM.h \
  ../Core/Inc/tim.h ../Core/Inc/border_sensors.h ../Core/Inc/drv_bt.h \
- ../Core/Inc/ADXL343_driver.h ../Core/Inc/ydlidar.h \
+ ../Core/Inc/ADXL343_driver.h ../Core/Inc/driver_LIDAR.h \
  ../Core/Inc/MoteurPWM.h ../Core/Inc/main.h
 ../Core/Inc/robot_logic.h:
 ../Middlewares/Third_Party/FreeRTOS/Source/include/FreeRTOS.h:
@@ -96,12 +96,12 @@ Core/Src/robot_logic.o: ../Core/Src/robot_logic.c \
 ../Core/Inc/border_sensors.h:
 ../Core/Inc/ADXL343_driver.h:
 ../Core/Inc/main.h:
-../Core/Inc/ydlidar.h:
+../Core/Inc/driver_LIDAR.h:
 ../Core/Inc/MoteurPWM.h:
 ../Core/Inc/tim.h:
 ../Core/Inc/border_sensors.h:
 ../Core/Inc/drv_bt.h:
 ../Core/Inc/ADXL343_driver.h:
-../Core/Inc/ydlidar.h:
+../Core/Inc/driver_LIDAR.h:
 ../Core/Inc/MoteurPWM.h:
 ../Core/Inc/main.h:

@@ -19,6 +19,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "cmsis_os.h"
+#include "dma.h"
 #include "i2c.h"
 #include "tim.h"
 #include "usart.h"
@@ -29,7 +30,7 @@
 #include "MoteurPWM.h"
 #include "drv_bt.h"
 #include "ADXL343_driver.h"
-#include "ydlidar.h"
+#include "driver_LIDAR.h"
 #include "border_sensors.h"
 #include "robot_logic.h"
 #include <stdio.h>
@@ -58,6 +59,9 @@ Moteur_HandleTypeDef moteurG;
 h_Robot hrob;
 
 SemaphoreHandle_t mutexSensors;
+
+uint8_t lidar_dma_buffer[64]; // Buffer circulaire pour le DMA
+h_YLIDARX2_t hlidar;          // Structure de contrôle LIDAR
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -106,6 +110,7 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
+  MX_DMA_Init();
   MX_I2C1_Init();
   MX_TIM3_Init();
   MX_TIM4_Init();
@@ -114,11 +119,16 @@ int main(void)
   MX_USART2_UART_Init();
   MX_USART3_UART_Init();
   MX_USART1_UART_Init();
+  MX_TIM2_Init();
   /* USER CODE BEGIN 2 */
 
 //Initialisation du Bluetooth
   BT_Init();
   BT_SendString("BLE Ready\r\n");
+
+  YLIDAR_Init(&hlidar);
+  HAL_UART_Receive_DMA(&huart2, lidar_dma_buffer, sizeof(lidar_dma_buffer));// Démarre la réception DMA en mode circulaire
+  HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_4);
 
   Moteur_init(&moteurD, &htim1, TIM_CHANNEL_1);
   Moteur_init(&moteurG, &htim1, TIM_CHANNEL_2);
@@ -211,13 +221,17 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
-// BLE
-void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
-{
-	if (huart->Instance == USART3)  // Bluetooth
-	{
-		BT_UART_RxCpltCallback(BT_rxByte);
-	}
+void HAL_UART_RxHalfCpltCallback(UART_HandleTypeDef *huart) {
+    if(huart->Instance == USART2) YLIDAR_PushBytes(lidar_dma_buffer, sizeof(lidar_dma_buffer)/2);
+}
+
+void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
+    if (huart->Instance == USART3) { // Bluetooth
+        BT_UART_RxCpltCallback(BT_rxByte);
+    }
+    if (huart->Instance == USART2) { // LIDAR
+        YLIDAR_PushBytes(lidar_dma_buffer + sizeof(lidar_dma_buffer)/2, sizeof(lidar_dma_buffer)/2);
+    }
 }
 /* USER CODE END 4 */
 

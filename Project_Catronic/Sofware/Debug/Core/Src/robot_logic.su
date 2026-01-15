@@ -1,4 +1,4 @@
 ../Core/Src/robot_logic.c:26:6:BorderTask	24	static
 ../Core/Src/robot_logic.c:48:6:ShockTask	24	static
 ../Core/Src/robot_logic.c:89:6:BluetoothTask	16	static
-../Core/Src/robot_logic.c:148:6:RobotModeTask	24	static
+../Core/Src/robot_logic.c:148:6:RobotModeTask	48	static
