@@ -70,6 +70,7 @@ Ce sous-système regroupe tous les capteurs qui permettent au robot de percevoir
 Deux moteurs DC avec drivers **ZXBM5210-SP-13** permettent un contrôle fin de la vitesse et de la direction (contrôle différentiel) via des signaux PWM.
 
 ![Schéma des actionneurs](Project_Catronic/Images/Schéma_capteurs.jpg)
+
 *Schéma des actionneurs (moteurs et drivers).*
 
 #### Interface Utilisateur
@@ -100,28 +101,6 @@ Elle se compose d'un interrupteur, d'un bouton de démarrage, d'une LED de statu
 
 ---
 
-## Structure du projet
-
-```
-Autonomous-Robot-main/
-├── Project_Catronic/       # Fichiers du projet STM32CubeIDE
-│   ├── Core/               # Code source principal (main.c, freertos.c, etc.)
-│   ├── Drivers/            # Drivers CMSIS et HAL
-│   ├── Images/             # Images et schémas du projet
-│   └── ...
-├── README.md               # Ce fichier
-└── ...                     # Autres documents ou ressources
-```
-
-## Installation et compilation
-
-1.  **Clonez** ce dépôt sur votre machine.
-2.  **Ouvrez STM32CubeIDE** et importez le projet (`File > Import... > General > Existing Projects into Workspace`).
-3.  **Compilez** le projet (icône "Build").
-4.  **Téléversez** le programme sur le STM32 via une sonde ST-Link (bouton "Run").
-5.  **Démarrez** le robot.
-
----
 
 ## Tests et Validation
 
@@ -132,15 +111,15 @@ L'objectif est de valider le contrôle des moteurs et la précision des déplace
 - **Test de trajectoire rectiligne :** Vérification que le robot avance droit sur une distance donnée. Les écarts ont été mesurés et corrigés via l'asservissement des encodeurs.
 - **Test de rotation :** Mesure de la précision des rotations (ex: 90°, 180°).
 - **Réponse du PWM :** Analyse de l'efficacité de la commande PWM pour l'accélération, la décélération et la correction de trajectoire.
-- *(Des vidéos et graphiques illustrant ces tests seront ajoutés ici.)*
 
 ### Test de la détection de bordures
 Ce test est crucial pour la sécurité du robot. Il valide la robustesse des capteurs mécaniques.
 - **Approche frontale :** Le robot est dirigé droit vers le bord de la table. On vérifie qu'il s'arrête et recule à chaque fois, sans chute.
 - **Approche en diagonale :** Le test est répété avec différents angles d'approche pour s'assurer que le levier du capteur est bien actionné même lorsque le robot n'est pas perpendiculaire au bord.
 - **Fiabilité :** Répétition du test des dizaines de fois pour garantir la reproductibilité et la fiabilité du mécanisme.
-- *(Des vidéos montrant le comportement du robot au bord de la table seront ajoutées ici.)*
+
 ![Image du test de détection de bordures et mode robot](Project_Catronic/Images/test1.jpg)
+
 *Visualisation du comportement du robot lors de la détection de bordures et de la commutation des modes "Chat"/"Souris".*
 
 ### Test de détection de collision et changement de mode
@@ -155,11 +134,6 @@ Ce test valide la perception de l'environnement et la stratégie comportementale
 ![Test du LIDAR avec Tera Term](Project_Catronic/Images/test_lidar.jpg)
 
 *Capture d'écran de Tera Term montrant les données du LIDAR pour la détection d'obstacles.*
-
-
-
-- *(Des vidéos des scénarios de jeu "chat et souris" seront ajoutées ici.)*
-
 
 
 ### Test de communication (Bluetooth)
