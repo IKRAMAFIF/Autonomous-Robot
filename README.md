@@ -235,9 +235,6 @@ Cependant, certains défis techniques ont été rencontrés, notamment lors de l
 
 Ce travail a néanmoins permis d’acquérir une expérience pratique solide en systèmes embarqués, en communication sans fil et en intégration capteurs. Des perspectives d’amélioration incluent l’optimisation du traitement des données LiDAR, l’amélioration de la fusion capteurs et l’extension des capacités de détection du robot.
 
-### Apprentissages
-Ce projet a été une excellente opportunité d'appliquer des compétences en conception de PCB (KiCad), en programmation de microcontrôleurs (STM32), en systèmes temps réel (FreeRTOS) et en robotique mobile (stratégie de déplacement, perception).
-
 ---
 
 <p align="center">
