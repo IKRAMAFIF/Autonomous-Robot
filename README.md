@@ -162,7 +162,9 @@ Pour garantir la fiabilité du système, plusieurs séries de tests ont été me
 ### Test de déplacement et moteurs
 
 - Validation du contrôle PWM et de la précision directionnelle.  
-- Ajustement des vitesses asymétriques pour corriger les écarts.  
+- Ajustement des vitesses asymétriques pour corriger les écarts.
+  
+![Test moteur](Media/test_moteur.jpg)
 
 ### Test de détection de bordures/détection de collision
 
