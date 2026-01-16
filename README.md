@@ -202,14 +202,21 @@ Ce test vérifie la connectivité et la fiabilité de la communication sans fil 
 *Figure 11 – Communication Bluetooth et affichage des données.*
 
 ---
+## Structure du dépôt GitHub
 
+```
+├── Firmware/           → Code STM32CubeIDE 
+├── Hardware/           → Schémas, PCB et vues 3D KiCad
+├── Media/              → Illustrations et résultats de tests
+└── README.md           → Présentation du projet
+```
+
+---
 ##  Conclusion
 
 Le projet **CATRONIC** a permis de concevoir un robot complet intégrant **électronique, programmation temps réel et stratégie comportementale**.
 
 ### Défis rencontrés
-
-
 - **Intégration matérielle :** L'un des principaux défis a été de faire cohabiter l'ensemble des composants (LIDAR, drivers moteurs, capteurs) sur le PCB tout en gérant les contraintes d'alimentation et les interférences potentielles.
 - **Fiabilité de la détection :** Le traitement des données brutes du LIDAR pour distinguer un robot adverse d'un autre type d'obstacle a nécessité un filtrage et des algorithmes de reconnaissance de formes.
 - **Gestion temps réel :** La synchronisation des différentes tâches (détection de bord, balayage LIDAR, contrôle moteur) sous FreeRTOS a été complexe pour garantir une réactivité sans faille et éviter les conflits de ressources.
