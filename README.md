@@ -212,20 +212,28 @@ Ce test vérifie la connectivité et la fiabilité de la communication sans fil 
 ```
 
 ---
+##  Test final
+
+
+![Final Robot Test](Media/final_test.gif)
+
+Lors du test final, le robot a validé plusieurs fonctionnalités clés. Les capteurs de bordure fonctionnent correctement, permettant au robot de détecter les limites de la surface et d’éviter toute chute. La commande via Bluetooth est également opérationnelle : il est possible de sélectionner le mode de fonctionnement du robot ainsi que d’envoyer des commandes Start et Stop pour lancer ou arrêter le système. Les données du LiDAR ont pu être lues avec succès, cependant toutes les mesures n’étaient pas fiables et l’intégration complète du capteur dans le système embarqué n’a pas pu être finalisée. En conséquence, le robot n’est pas capable de détecter les autres robots à ce stade. Enfin, l’accéléromètre permet de détecter les chocs lors d’une collision, déclenchant automatiquement un changement de mode de fonctionnement du robot.
+
+
+
+
+
+
+---
 ##  Conclusion
 
-Le projet **CATRONIC** a permis de concevoir un robot complet intégrant **électronique, programmation temps réel et stratégie comportementale**.
+## Conclusion
 
-### Défis rencontrés
-- **Intégration matérielle :** L'un des principaux défis a été de faire cohabiter l'ensemble des composants (LIDAR, drivers moteurs, capteurs) sur le PCB tout en gérant les contraintes d'alimentation et les interférences potentielles.
-- **Fiabilité de la détection :** Le traitement des données brutes du LIDAR pour distinguer un robot adverse d'un autre type d'obstacle a nécessité un filtrage et des algorithmes de reconnaissance de formes.
-- **Gestion temps réel :** La synchronisation des différentes tâches (détection de bord, balayage LIDAR, contrôle moteur) sous FreeRTOS a été complexe pour garantir une réactivité sans faille et éviter les conflits de ressources.
+Ce projet a permis de concevoir et de mettre en œuvre un robot mobile intégrant plusieurs capteurs et modes de fonctionnement. Les tests finaux ont validé avec succès la détection des bordures, la commande via Bluetooth avec sélection des modes ainsi que la gestion des collisions à l’aide de l’accéléromètre. Ces fonctionnalités assurent un fonctionnement sûr et contrôlable du robot.
 
+Cependant, certains défis techniques ont été rencontrés, notamment lors de l’exploitation et de l’intégration du LiDAR. Bien que les données aient pu être lues, leur fiabilité et leur intégration complète dans l’architecture embarquée n’ont pas pu être finalisées, empêchant la détection des autres robots. Ces limitations sont principalement liées aux contraintes de temps et à la complexité du traitement des données capteur.
 
-### Pistes d'amélioration
-- **Fusion de capteurs :** Pour une meilleure robustesse, les données de l'accéléromètre pourraient être fusionnées avec celles du LIDAR pour mieux interpréter les contacts et les situations de blocage.
-- **Stratégie multi-robots :** La logique pourrait être étendue pour gérer des scénarios avec plus de deux robots, en introduisant des stratégies de coopération ou de compétition plus complexes.
-- **Interface de communication :** L'ajout d'un module de communication sans fil (Bluetooth) permettrait de visualiser l'état du robot en temps réel sur une interface externe ou de changer son rôle à la volée.
+Ce travail a néanmoins permis d’acquérir une expérience pratique solide en systèmes embarqués, en communication sans fil et en intégration capteurs. Des perspectives d’amélioration incluent l’optimisation du traitement des données LiDAR, l’amélioration de la fusion capteurs et l’extension des capacités de détection du robot.
 
 ### Apprentissages
 Ce projet a été une excellente opportunité d'appliquer des compétences en conception de PCB (KiCad), en programmation de microcontrôleurs (STM32), en systèmes temps réel (FreeRTOS) et en robotique mobile (stratégie de déplacement, perception).
