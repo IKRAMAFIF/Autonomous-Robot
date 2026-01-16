@@ -11,7 +11,7 @@ Le robot **CATRONIC** est un système embarqué autonome conçu pour simuler un 
 
 ---
 
-## 🧩 Table des matières
+##  Table des matières
 - [Stratégie de fonctionnement](#stratégie-de-fonctionnement)
 - [Architecture du système](#architecture-du-système-global)
   - [Schémas généraux](#schémas-généraux)
@@ -23,7 +23,7 @@ Le robot **CATRONIC** est un système embarqué autonome conçu pour simuler un 
 
 ---
 
-## 🧠 Stratégie de fonctionnement
+##  Stratégie de fonctionnement
 
 La logique du robot est orchestrée par un noyau temps réel (**FreeRTOS**), permettant de gérer plusieurs tâches simultanément pour une réactivité maximale.
 
@@ -40,7 +40,7 @@ La logique du robot est orchestrée par un noyau temps réel (**FreeRTOS**), per
 
 ---
 
-## ⚙️ Architecture du système global
+##  Architecture du système global
 
 L’architecture est organisée autour de cinq sous-ensembles principaux : **alimentation**, **commande**, **acquisition**, **déplacement** et **interface utilisateur**.
 
@@ -67,39 +67,39 @@ Vues d’ensemble de l’architecture matérielle :
 
 ### Sous-systèmes
 
-#### 🔋 Alimentation
+####  Alimentation
 Le robot est alimenté par une batterie **NiMH 7.2V**, régulée en **5V** pour le LIDAR et en **3.3V** pour le reste des composants.
 
 ![Schéma d'alimentation](Project_Catronic/Images/schema_alimentation.jpg)
 *Figure 5 – Schéma d’alimentation du robot.*
 
-#### 🧠 Commande
+####  Commande
 Le cœur du système repose sur un **STM32G431CBU6** (ARM Cortex-M4) exécutant **FreeRTOS** pour coordonner les différentes tâches.
 
 ![Schéma STM32](Project_Catronic/Images/schema_stm32.jpg)
 
 *Figure 6 – Schéma de la carte de commande STM32.*
 
-#### 👁️ Acquisition
+#### Acquisition
 Ce sous-système regroupe les capteurs assurant la perception de l’environnement.
 
 ![Schéma des capteurs (sensors)](Project_Catronic/Images/sensors.jpg)
 
 *Figure 7 – Sous-système de détection (LIDAR, accéléromètre, capteurs WS-MITV).* 
 
-#### ⚙️ Déplacement
+####  Déplacement
 Deux moteurs DC, commandés par des **drivers ZXBM5210-SP-13**, permettent un contrôle précis de la vitesse et de la direction via des signaux PWM.
 
 ![Schéma des actionneurs](Project_Catronic/Images/Schéma_capteurs.jpg)
 
 *Figure 8 – Schéma des moteurs et drivers.*
 
-#### 🧩 Interface utilisateur
+####  Interface utilisateur
 Interrupteur, bouton de démarrage, LED de statut et connecteur SWD pour le débogage.
 
 ---
 
-## 🧾 Nomenclature (Bill of Materials)
+##  Nomenclature (Bill of Materials)
 
 | Composant | Référence | Datasheet |
 |:---|:---|:---|
@@ -126,7 +126,7 @@ Interrupteur, bouton de démarrage, LED de statut et connecteur SWD pour le déb
 -   **`border_sensors.c`** : Gère la logique des capteurs de bordure.
 -   **`drv_bt.c`** : Assure la gestion de la communication Bluetooth (HC-05), notamment la réception de commandes.
 
-## ⚙️ Structure logicielle et FreeRTOS
+##  Structure logicielle et FreeRTOS
 
 Le comportement du robot est géré par **quatre tâches FreeRTOS** principales :
 
@@ -154,7 +154,7 @@ Le comportement du robot est géré par **quatre tâches FreeRTOS** principales 
 
 ---
 
-## 🧪 Tests et validation
+##  Tests et validation
 
 Pour garantir la fiabilité du système, plusieurs séries de tests ont été menées.
 
@@ -203,7 +203,7 @@ Ce test vérifie la connectivité et la fiabilité de la communication sans fil 
 
 ---
 
-## 🏁 Conclusion
+##  Conclusion
 
 Le projet **CATRONIC** a permis de concevoir un robot complet intégrant **électronique, programmation temps réel et stratégie comportementale**.
 
@@ -227,6 +227,6 @@ Ce projet a été une excellente opportunité d'appliquer des compétences en co
 
 <p align="center">
   2026 — Projet académique ENSEA
-  <br>Développement d’un robot autonome Chat–Souris 🐱🐭
+  <br>Développement d’un robot autonome Chat–Souris 
 </p>
 
