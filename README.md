@@ -225,8 +225,6 @@ Lors du test final, le robot a validé plusieurs fonctionnalités clés. Les cap
 
 
 ---
-##  Conclusion
-
 ## Conclusion
 
 Ce projet a permis de concevoir et de mettre en œuvre un robot mobile intégrant plusieurs capteurs et modes de fonctionnement. Les tests finaux ont validé avec succès la détection des bordures, la commande via Bluetooth avec sélection des modes ainsi que la gestion des collisions à l’aide de l’accéléromètre. Ces fonctionnalités assurent un fonctionnement sûr et contrôlable du robot.
