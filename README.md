@@ -121,36 +121,52 @@ Autonomous-Robot-main/
 
 ## Tests et Validation
 
-*(Cette section est à compléter par le groupe.)*
+Pour garantir la fiabilité et la performance du robot CATRONIC, une série de tests unitaires et d'intégration a été menée sur chaque sous-système. Cette section documente les procédures de test et les résultats obtenus.
 
-Décrivez ici les tests que vous avez effectués pour chaque sous-système.
-
-### Test de déplacement
-- Le robot avance-t-il droit ?
-- La commande PWM est-elle efficace pour corriger les trajectoires ?
-- *(Ajoutez des vidéos ou des images des tests)*
+### Test de déplacement et des moteurs
+L'objectif est de valider le contrôle des moteurs et la précision des déplacements.
+- **Test de trajectoire rectiligne :** Vérification que le robot avance droit sur une distance donnée. Les écarts ont été mesurés et corrigés via l'asservissement des encodeurs.
+- **Test de rotation :** Mesure de la précision des rotations (ex: 90°, 180°).
+- **Réponse du PWM :** Analyse de l'efficacité de la commande PWM pour l'accélération, la décélération et la correction de trajectoire.
+- *(Des vidéos et graphiques illustrant ces tests seront ajoutés ici.)*
+![Image du test de déplacement](Project_Catronic/Images/test1.jpg)
+*Description du comportement du robot lors des tests de déplacement.*
 
 ### Test de la détection de bordures
-- Le robot s'arrête-t-il bien avant de tomber ?
-- Comment se comporte-t-il s'il arrive en diagonale près du bord ?
-- *(Ajoutez des vidéos ou des images des tests)*
+Ce test est crucial pour la sécurité du robot. Il valide la robustesse des capteurs mécaniques.
+- **Approche frontale :** Le robot est dirigé droit vers le bord de la table. On vérifie qu'il s'arrête et recule à chaque fois, sans chute.
+- **Approche en diagonale :** Le test est répété avec différents angles d'approche pour s'assurer que le levier du capteur est bien actionné même lorsque le robot n'est pas perpendiculaire au bord.
+- **Fiabilité :** Répétition du test des dizaines de fois pour garantir la reproductibilité et la fiabilité du mécanisme.
+- *(Des vidéos montrant le comportement du robot au bord de la table seront ajoutées ici.)*
+![Image du test de détection de bordures](Project_Catronic/Images/test2.jpg)
+*Description du comportement du robot lors des tests de détection de bordures.*
 
 ### Test du LIDAR et de la logique de jeu
-- La détection du robot adverse est-elle fiable ?
-- Le robot suit-il (Chat) ou fuit-il (Souris) correctement ?
+Ce test valide la perception de l'environnement et la stratégie comportementale.
+- **Fiabilité de la détection :** Vérification que le LIDAR détecte de manière fiable les autres robots et les obstacles dans son champ de vision de 360°.
+- **Mode Poursuite (Chat) :** Le robot est configuré en mode "Chat". On observe s'il identifie correctement la "Souris" et ajuste sa trajectoire pour la poursuivre.
+- **Mode Fuite (Souris) :** Le robot est configuré en mode "Souris". On vérifie qu'il s'éloigne activement du "Chat" tout en évitant les bords de la table.
 
 ![Test du LIDAR avec Tera Term](Project_Catronic/Images/test_lidar.jpg)
 *Capture d'écran de Tera Term montrant les données du LIDAR pour la détection d'obstacles.*
 
-- *(Ajoutez des vidéos ou des images des tests)*
+- *(Des vidéos des scénarios de jeu "chat et souris" seront ajoutés ici.)*
 
 ---
 
 ## Conclusion
 
-*(Cette section est à compléter par le groupe.)*
+Le projet CATRONIC a permis de mettre en œuvre un cycle complet de développement de système embarqué, de la conception matérielle à la programmation d'une intelligence artificielle comportementale.
 
-Faites un bilan du projet :
-- Quels ont été les principaux défis rencontrés (techniques, organisationnels) ?
-- Quelles sont les pistes d'amélioration possibles ?
-- Qu'avez-vous appris durant ce projet ?
+### Défis rencontrés
+- **Intégration matérielle :** L'un des principaux défis a été de faire cohabiter l'ensemble des composants (LIDAR, drivers moteurs, capteurs) sur le PCB tout en gérant les contraintes d'alimentation et les interférences potentielles.
+- **Fiabilité de la détection :** Le traitement des données brutes du LIDAR pour distinguer un robot adverse d'un autre type d'obstacle a nécessité un filtrage et des algorithmes de reconnaissance de formes.
+- **Gestion temps réel :** La synchronisation des différentes tâches (détection de bord, balayage LIDAR, contrôle moteur) sous FreeRTOS a été complexe pour garantir une réactivité sans faille et éviter les conflits de ressources.
+
+### Pistes d'amélioration
+- **Fusion de capteurs :** Pour une meilleure robustesse, les données de l'accéléromètre pourraient être fusionnées avec celles du LIDAR pour mieux interpréter les contacts et les situations de blocage.
+- **Stratégie multi-robots :** La logique pourrait être étendue pour gérer des scénarios avec plus de deux robots, en introduisant des stratégies de coopération ou de compétition plus complexes.
+- **Interface de communication :** L'ajout d'un module de communication sans fil (comme le Bluetooth déjà présent sur la carte) permettrait de visualiser l'état du robot en temps réel sur une interface externe ou de changer son rôle à la volée.
+
+### Apprentissages
+Ce projet a été une excellente opportunité d'appliquer des compétences en conception de PCB (KiCad), en programmation de microcontrôleurs (STM32), en systèmes temps réel (FreeRTOS) et en robotique mobile (stratégie de déplacement, perception).
