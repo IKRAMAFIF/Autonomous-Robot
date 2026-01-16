@@ -161,9 +161,9 @@ Pour garantir la fiabilité du système, plusieurs séries de tests ont été me
 
 ### Test de déplacement et moteurs
 
-- Validation du contrôle PWM et de la précision directionnelle.  
-- Ajustement des vitesses asymétriques pour corriger les écarts.
-  
+Ce test valide le contrôle PWM et met en évidence les écarts de vitesse entre les moteurs. 
+Un ajustement asymétrique des vitesses a permis d’améliorer la précision du déplacement du robot.
+
 ![Test moteur](Media/test_moteur.jpg)
 
 ### Test de détection de bordures/détection de collision
