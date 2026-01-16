@@ -19,6 +19,7 @@ Le robot **CATRONIC** est un système embarqué autonome conçu pour simuler un 
 - [Nomenclature (Bill of Materials)](#nomenclature-bill-of-materials)
 - [Structure logicielle et FreeRTOS](#structure-logicielle-et-freertos)
 - [Tests et validation](#tests-et-validation)
+- [Test final](#test-final)
 - [Conclusion](#conclusion)
 
 ---
