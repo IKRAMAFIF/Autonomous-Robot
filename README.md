@@ -22,7 +22,7 @@ Le robot **CATRONIC** est un système embarqué autonome conçu pour simuler un 
 La logique du robot est orchestrée par un noyau temps réel (FreeRTOS), permettant de gérer plusieurs tâches simultanément pour une réactivité maximale.
 
 #### Détection de l'environnement
-- **Détection des bords :** La stratégie de déplacement repose sur la détection des bords de la table grâce à des **capteurs mécaniques Würth MITV** positionnés à l’avant. Au contact du vide, le levier du capteur enclenche un signal qui déclenche une interruption, forçant le robot à changer de direction immédiatement pour ne pas tomber. Cette solution est robuste et fiable.
+- **Détection des bords :** Notez qu'il y a 4 capteurs de bordure : un à l'avant, un à l'arrière, un à gauche et un à droite. La stratégie de déplacement repose sur la détection des bords de la table grâce à des **capteurs mécaniques Würth MITV** positionnés à l’avant. Au contact du vide, le levier du capteur enclenche un signal qui déclenche une interruption, forçant le robot à changer de direction immédiatement pour ne pas tomber. Cette solution est robuste et fiable.
 - **Détection des adversaires :** La position des autres robots est détectée par le **LIDAR YDLIDAR X2**, qui scanne l'environnement à 360°. Les données sont traitées en temps réel pour déterminer la position et la distance de l'adversaire.
 - **Détection des collisions :** L'**accéléromètre ADXL343** est utilisé pour détecter les impacts. Une forte accélération soudaine est interprétée comme une collision avec un autre robot. Il peut également servir d'arrêt d'urgence manuel.
 
@@ -70,7 +70,6 @@ Ce sous-système regroupe tous les capteurs qui permettent au robot de percevoir
 Deux moteurs DC avec drivers **ZXBM5210-SP-13** permettent un contrôle fin de la vitesse et de la direction (contrôle différentiel) via des signaux PWM.
 
 ![Schéma des actionneurs](Project_Catronic/Images/Schéma_capteurs.jpg)
-
 *Schéma des actionneurs (moteurs et drivers).*
 
 #### Interface Utilisateur
@@ -101,6 +100,136 @@ Elle se compose d'un interrupteur, d'un bouton de démarrage, d'une LED de statu
 
 ---
 
+## Structure du projet
+
+```
+Autonomous-Robot-main/
+├── Project_Catronic/       # Fichiers du projet STM32CubeIDE
+│   ├── Core/               # Code source principal (main.c, freertos.c, etc.)
+│   ├── Drivers/            # Drivers CMSIS et HAL
+│   ├── Images/             # Images et schémas du projet
+│   └── ...
+├── README.md               # Ce fichier
+└── ...                     # Autres documents ou ressources
+```
+
+## Architecture Logicielle
+
+Le logiciel embarqué est construit autour de l'OS temps réel **FreeRTOS**, ce qui permet une gestion concurrente des différentes fonctionnalités du robot. L'architecture est modulaire, chaque module matériel (moteurs, capteurs) ayant son propre pilote logiciel.
+
+### Code sous forme de diagrammes (Code as Diagrams)
+
+Les diagrammes de séquence et d'état ci-dessous illustrent le comportement des principales tâches FreeRTOS et leurs interactions, offrant une vue d'ensemble claire de la logique du robot.
+
+#### Diagramme de séquence de la tâche `RobotModeTask`
+
+\`\`\`mermaid
+sequenceDiagram
+    participant RobotModeTask
+    participant BorderTask
+    participant ShockTask
+    participant BluetoothTask
+    participant LIDAR
+    participant Motors
+
+    RobotModeTask->>BorderTask: Lit l'état des capteurs de bordure (mutex)
+    activate BorderTask
+    BorderTask-->>RobotModeTask: Renvoie `border_active` et direction
+    deactivate BorderTask
+
+    alt Si `border_active` est vrai
+        RobotModeTask->>Motors: Exécute manœuvre d'évitement (reculer, tourner)
+    else Si aucun bord détecté
+        RobotModeTask->>ShockTask: Lit l'état de `robot_mode`
+        activate ShockTask
+        ShockTask-->>RobotModeTask: Renvoie `robot_mode` (CHAT/SOURIS/STOP)
+        deactivate ShockTask
+
+        alt Si `robot_mode` est CHAT
+            RobotModeTask->>LIDAR: Analyse données (distance, angle)
+            activate LIDAR
+            LIDAR-->>RobotModeTask: Renvoie position de la souris la plus proche
+            deactivate LIDAR
+            RobotModeTask->>Motors: Calcule et exécute trajectoire de poursuite
+        else Si `robot_mode` est SOURIS
+            RobotModeTask->>LIDAR: Analyse données (distance, angle)
+            activate LIDAR
+            LIDAR-->>RobotModeTask: Renvoie position du chat le plus proche
+            deactivate LIDAR
+            RobotModeTask->>Motors: Calcule et exécute trajectoire de fuite
+        else Si `robot_mode` est STOP
+            RobotModeTask->>Motors: Arrête les moteurs
+        end
+    end
+
+    BluetoothTask->>RobotModeTask: Envoie commande (STOP, START, CHAT, SOURIS)
+    activate BluetoothTask
+    RobotModeTask->>BluetoothTask: Met à jour `robot_mode`
+    deactivate BluetoothTask
+\`\`\`
+
+#### Diagramme d'état du robot
+
+\`\`\`mermaid
+stateDiagram-v2
+    [*] --> STOP
+    STOP --> CHAT: Commande Bluetooth START + Mode Chat
+    STOP --> SOURIS: Commande Bluetooth START + Mode Souris
+    CHAT --> SOURIS: Choc détecté
+    SOURIS --> CHAT: Choc détecté
+    CHAT --> STOP: Commande Bluetooth STOP ou aucun adversaire
+    SOURIS --> STOP: Commande Bluetooth STOP ou aucun adversaire
+    CHAT --> EVITEMENT_BORD: Bord détecté
+    SOURIS --> EVITEMENT_BORD: Bord détecté
+    EVITEMENT_BORD --> CHAT: Bord évité et mode précédent était CHAT
+    EVITEMENT_BORD --> SOURIS: Bord évité et mode précédent était SOURIS
+\`\`\`
+
+### Fichiers sources principaux
+
+-   **`main.c`** : Point d'entrée du programme. Ce fichier initialise le microcontrôleur, tous les périphériques (GPIO, I2C, UART, Timers), les pilotes (moteurs, LIDAR), et crée les quatre tâches FreeRTOS qui orchestrent le comportement du robot.
+-   **`robot_logic.c`** : Cœur de l'intelligence du robot. Il contient l'implémentation des tâches FreeRTOS qui gèrent la logique de jeu, la détection des collisions et des bordures, ainsi que la communication.
+-   **`MoteurPWM.c`** : Pilote pour le contrôle des moteurs DC. Il fournit des fonctions pour initialiser les moteurs, et contrôler leur vitesse via des signaux PWM.
+-   **`ADXL343_driver.c`** : Pilote pour l'accéléromètre ADXL343. Il gère l'initialisation du capteur et la détection de chocs.
+-   **`driver_LIDAR.c`** : Pilote pour le capteur LIDAR YDLIDAR X2. Il traite les données brutes reçues via UART DMA pour en extraire la distance et l'angle des obstacles.
+-   **`border_sensors.c`** : Gère la logique des capteurs de bordure.
+-   **`drv_bt.c`** : Assure la gestion de la communication Bluetooth (HC-05), notamment la réception de commandes.
+
+### Tâches FreeRTOS (`robot_logic.c`)
+
+Le comportement du robot est géré par quatre tâches concurrentes :
+
+1.  **`BorderTask`**
+    -   **Rôle :** Surveille en permanence les capteurs de bordure.
+    -   **Fonctionnement :** À intervalle régulier (100 ms), la tâche lit l'état des capteurs. Si un bord est détecté, elle met à jour une variable globale (`border_active`) protégée par un mutex pour signaler l'état et la direction du bord détecté à la tâche principale `RobotModeTask`.
+
+2.  **`ShockTask`**
+    -   **Rôle :** Détecte les collisions et inverse les rôles "Chat" et "Souris".
+    -   **Fonctionnement :** La tâche initialise l'accéléromètre pour la détection de chocs. Elle vérifie en continu si un choc a eu lieu. Si c'est le cas, elle change l'état du robot (`robot_mode`) de `CHAT` à `SOURIS` ou inversement.
+
+3.  **`BluetoothTask`**
+    -   **Rôle :** Traite les commandes reçues via Bluetooth.
+    -   **Fonctionnement :** La tâche attend de recevoir des commandes utilisateur. Elle peut ainsi forcer le robot à s'arrêter (`STOP`), à démarrer (`START`), ou à passer en mode `CHAT` ou `SOURIS`, offrant un contrôle manuel sur le comportement du robot.
+
+4.  **`RobotModeTask`**
+    -   **Rôle :** Tâche principale qui exécute la logique de déplacement et de jeu.
+    -   **Fonctionnement :** C'est la tâche la plus complexe. À chaque cycle :
+        -   Elle vérifie l'état de la variable `border_active`. Si un bord est détecté, elle exécute une manœuvre d'évitement prioritaire (reculer puis tourner) pour empêcher le robot de tomber.
+        -   Si aucun bord n'est détecté, elle exécute la logique de jeu en fonction de la variable `robot_mode` :
+            -   **Mode `ROBOT_STOP` :** Les moteurs sont à l'arrêt.
+            -   **Mode `ROBOT_MODE_CHAT` (Poursuite) :** La tâche analyse les données du LIDAR pour trouver l'obstacle le plus proche. Si l'obstacle est en face, elle commande au robot d'avancer. Sinon, elle le fait tourner pour se diriger vers la cible.
+            -   **Mode `ROBOT_MODE_SOURIS` (Fuite) :** Si un obstacle (le "chat") est détecté à moins de 30 cm, le robot recule pour s'en éloigner. Sinon, il continue d'avancer pour explorer la zone de jeu.
+        -   Si aucun obstacle n'est détecté par le LIDAR, le robot s'arrête.
+
+## Installation et compilation
+
+1.  **Clonez** ce dépôt sur votre machine.
+2.  **Ouvrez STM32CubeIDE** et importez le projet (`File > Import... > General > Existing Projects into Workspace`).
+3.  **Compilez** le projet (icône "Build").
+4.  **Téléversez** le programme sur le STM32 via une sonde ST-Link (bouton "Run").
+5.  **Démarrez** le robot.
+
+---
 
 ## Tests et Validation
 
@@ -111,15 +240,15 @@ L'objectif est de valider le contrôle des moteurs et la précision des déplace
 - **Test de trajectoire rectiligne :** Vérification que le robot avance droit sur une distance donnée. Les écarts ont été mesurés et corrigés via l'asservissement des encodeurs.
 - **Test de rotation :** Mesure de la précision des rotations (ex: 90°, 180°).
 - **Réponse du PWM :** Analyse de l'efficacité de la commande PWM pour l'accélération, la décélération et la correction de trajectoire.
+- *(Des vidéos et graphiques illustrant ces tests seront ajoutés ici.)*
 
 ### Test de la détection de bordures
 Ce test est crucial pour la sécurité du robot. Il valide la robustesse des capteurs mécaniques.
 - **Approche frontale :** Le robot est dirigé droit vers le bord de la table. On vérifie qu'il s'arrête et recule à chaque fois, sans chute.
 - **Approche en diagonale :** Le test est répété avec différents angles d'approche pour s'assurer que le levier du capteur est bien actionné même lorsque le robot n'est pas perpendiculaire au bord.
 - **Fiabilité :** Répétition du test des dizaines de fois pour garantir la reproductibilité et la fiabilité du mécanisme.
-
+- *(Des vidéos montrant le comportement du robot au bord de la table seront ajoutées ici.)*
 ![Image du test de détection de bordures et mode robot](Project_Catronic/Images/test1.jpg)
-
 *Visualisation du comportement du robot lors de la détection de bordures et de la commutation des modes "Chat"/"Souris".*
 
 ### Test de détection de collision et changement de mode
@@ -134,6 +263,11 @@ Ce test valide la perception de l'environnement et la stratégie comportementale
 ![Test du LIDAR avec Tera Term](Project_Catronic/Images/test_lidar.jpg)
 
 *Capture d'écran de Tera Term montrant les données du LIDAR pour la détection d'obstacles.*
+
+
+
+- *(Des vidéos des scénarios de jeu "chat et souris" seront ajoutées ici.)*
+
 
 
 ### Test de communication (Bluetooth)
@@ -156,6 +290,15 @@ Ce test vérifie la connectivité et la fiabilité de la communication sans fil 
 
 Le projet CATRONIC a permis de mettre en œuvre un cycle complet de développement de système embarqué, de la conception matérielle à la programmation d'une intelligence artificielle comportementale.
 
+### Défis rencontrés
+- **Intégration matérielle :** L'un des principaux défis a été de faire cohabiter l'ensemble des composants (LIDAR, drivers moteurs, capteurs) sur le PCB tout en gérant les contraintes d'alimentation et les interférences potentielles.
+- **Fiabilité de la détection :** Le traitement des données brutes du LIDAR pour distinguer un robot adverse d'un autre type d'obstacle a nécessité un filtrage et des algorithmes de reconnaissance de formes.
+- **Gestion temps réel :** La synchronisation des différentes tâches (détection de bord, balayage LIDAR, contrôle moteur) sous FreeRTOS a été complexe pour garantir une réactivité sans faille et éviter les conflits de ressources.
+
+### Pistes d'amélioration
+- **Fusion de capteurs :** Pour une meilleure robustesse, les données de l'accéléromètre pourraient être fusionnées avec celles du LIDAR pour mieux interpréter les contacts et les situations de blocage.
+- **Stratégie multi-robots :** La logique pourrait être étendue pour gérer des scénarios avec plus de deux robots, en introduisant des stratégies de coopération ou de compétition plus complexes.
+- **Interface de communication :** L'ajout d'un module de communication sans fil (comme le Bluetooth déjà présent sur la carte) permettrait de visualiser l'état du robot en temps réel sur une interface externe ou de changer son rôle à la volée.
 
 ### Apprentissages
 Ce projet a été une excellente opportunité d'appliquer des compétences en conception de PCB (KiCad), en programmation de microcontrôleurs (STM32), en systèmes temps réel (FreeRTOS) et en robotique mobile (stratégie de déplacement, perception).
