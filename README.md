@@ -40,9 +40,13 @@ L’architecture est organisée autour de cinq sous-ensembles principaux : l’a
 
 Vues d'ensemble de l'architecture matérielle du robot :
 
-| Schéma fonctionnel | Schéma global | PCB |
-| :---: | :---: | :---: |
-| ![Diagramme d'architecture](Project_Catronic/Images/diagramme_architecture.png) | ![Schéma global](Project_Catronic/Images/schema_global.jpg) | ![PCB Catronic](Project_Catronic/Images/pcb_catronic.jpg) |
+![Diagramme d'architecture](Project_Catronic/Images/diagramme_architecture.png)
+
+![Schéma global](Project_Catronic/Images/schema_global.jpg)
+
+![PCB Catronic](Project_Catronic/Images/pcb_catronic.jpg)
+
+![Vue 3D du PCB](Project_Catronic/Images/pcb2.jpg)
 
 ### Sous-systèmes
 
@@ -139,11 +143,14 @@ Ce test est crucial pour la sécurité du robot. Il valide la robustesse des cap
 ![Image du test de détection de bordures et mode robot](Project_Catronic/Images/test1.jpg)
 *Visualisation du comportement du robot lors de la détection de bordures et de la commutation des modes "Chat"/"Souris".*
 
+### Test de détection de collision et changement de mode
+Ce test valide que la détection d'un choc via l'accéléromètre déclenche le changement de rôle du robot, comme illustré par l'image `test1.jpg`.
+- **Changement de mode après impact :** Après une collision détectée par l'accéléromètre, on vérifie que les rôles "Chat" et "Souris" sont bien inversés.
+
 ### Test du LIDAR et de la logique de jeu
 Ce test valide la perception de l'environnement et la stratégie comportementale.
-- **Fiabilité de la détection :** Vérification que le LIDAR détecte de manière fiable les autres robots et les obstacles dans son champ de vision de 360°.
-- **Mode Poursuite (Chat) :** Le robot est configuré en mode "Chat". On observe s'il identifie correctement la "Souris" et ajuste sa trajectoire pour la poursuivre.
-- **Mode Fuite (Souris) :** Le robot est configuré en mode "Souris". On vérifie qu'il s'éloigne activement du "Chat" tout en évitant les bords de la table.
+- **Fiabilité de la détection d'adversaire :** Vérification que le LIDAR détecte de manière fiable la position de l'autre robot.
+- **Logique de poursuite/fuite :** Validation de la trajectoire du robot en fonction des données du LIDAR (le "Chat" se rapproche de la "Souris", et la "Souris" s'en éloigne).
 
 ![Test du LIDAR avec Tera Term](Project_Catronic/Images/test_lidar.jpg)
 
