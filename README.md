@@ -225,7 +225,7 @@ Le projet **CATRONIC** a permis de concevoir un robot complet intégrant **élec
 ### Pistes d'amélioration
 - **Fusion de capteurs :** Pour une meilleure robustesse, les données de l'accéléromètre pourraient être fusionnées avec celles du LIDAR pour mieux interpréter les contacts et les situations de blocage.
 - **Stratégie multi-robots :** La logique pourrait être étendue pour gérer des scénarios avec plus de deux robots, en introduisant des stratégies de coopération ou de compétition plus complexes.
-- **Interface de communication :** L'ajout d'un module de communication sans fil (comme le Bluetooth déjà présent sur la carte) permettrait de visualiser l'état du robot en temps réel sur une interface externe ou de changer son rôle à la volée.
+- **Interface de communication :** L'ajout d'un module de communication sans fil (Bluetooth) permettrait de visualiser l'état du robot en temps réel sur une interface externe ou de changer son rôle à la volée.
 
 ### Apprentissages
 Ce projet a été une excellente opportunité d'appliquer des compétences en conception de PCB (KiCad), en programmation de microcontrôleurs (STM32), en systèmes temps réel (FreeRTOS) et en robotique mobile (stratégie de déplacement, perception).
