@@ -5,7 +5,9 @@
 </p>
 
 > **Auteurs :** AFIF Ikram, AIT ALLA Hajar, MENJLI Fakhri
+
 > **Encadré par :** Laurent FIACK, Nicolas PAPAZOGLOU
+
 > **Année académique :** 2025/2026
 
 Le robot **CATRONIC** est un système embarqué autonome conçu pour simuler un jeu de chat et de souris entre plusieurs robots identiques. Les robots évoluent sur une table sans bordures et sont capables de détecter les bords pour éviter toute chute.
