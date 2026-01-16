@@ -1,7 +1,7 @@
 # 🤖 Projet CATRONIC : Robot Autonome "Chat et Souris"
 
 <p align="center">
-  <img src="Project_Catronic/Media/logo_catronic.jpg" alt="Logo Catronic" width="200"/>
+  <img src="Media/logo_catronic.jpg" alt="Logo Catronic" width="200"/>
 </p>
 
 > **Auteurs :** AFIF Ikram, AIT ALLA Hajar, MENJLI Fakhri  
@@ -50,19 +50,19 @@ Vues d’ensemble de l’architecture matérielle :
 
 **Figure 1 – Diagramme d’architecture fonctionnelle du robot:**
 
-![Diagramme d'architecture](Project_Catronic/Media/diagramme_architecture.png)
+![Diagramme d'architecture](Media/diagramme_architecture.png)
 
 **Figure 2 – Schéma global du système:**
 
-![Schéma global](Project_Catronic/Media/schema_global.jpg)
+![Schéma global](Media/schema_global.jpg)
 
 **Figure 3 – Routage du PCB principal:**
 
-![PCB Catronic](Project_Catronic/Media/pcb_catronic.jpg)
+![PCB Catronic](Media/pcb_catronic.jpg)
 
 **Figure 4 – Vue 3D du PCB sous KiCad:**
 
-![Vue 3D du PCB](Project_Catronic/Media/pcb2.jpg)
+![Vue 3D du PCB](Media/pcb2.jpg)
 
 
 ### Sous-systèmes
@@ -70,27 +70,27 @@ Vues d’ensemble de l’architecture matérielle :
 ####  Alimentation
 Le robot est alimenté par une batterie **NiMH 7.2V**, régulée en **5V** pour le LIDAR et en **3.3V** pour le reste des composants.
 
-![Schéma d'alimentation](Project_Catronic/Media/schema_alimentation.jpg)
+![Schéma d'alimentation](Media/schema_alimentation.jpg)
 *Figure 5 – Schéma d’alimentation du robot.*
 
 ####  Commande
 Le cœur du système repose sur un **STM32G431CBU6** (ARM Cortex-M4) exécutant **FreeRTOS** pour coordonner les différentes tâches.
 
-![Schéma STM32](Project_Catronic/Media/schema_stm32.jpg)
+![Schéma STM32](Media/schema_stm32.jpg)
 
 *Figure 6 – Schéma de la carte de commande STM32.*
 
 #### Acquisition
 Ce sous-système regroupe les capteurs assurant la perception de l’environnement.
 
-![Schéma des capteurs (sensors)](Project_Catronic/Media/sensors.jpg)
+![Schéma des capteurs (sensors)](Media/sensors.jpg)
 
 *Figure 7 – Sous-système de détection (LIDAR, accéléromètre, capteurs WS-MITV).* 
 
 ####  Déplacement
 Deux moteurs DC, commandés par des **drivers ZXBM5210-SP-13**, permettent un contrôle précis de la vitesse et de la direction via des signaux PWM.
 
-![Schéma des actionneurs](Project_Catronic/Media/Schéma_capteurs.jpg)
+![Schéma des actionneurs](Media/Schéma_capteurs.jpg)
 
 *Figure 8 – Schéma des moteurs et drivers.*
 
@@ -171,7 +171,7 @@ Ce test est crucial pour la sécurité du robot. Il valide la robustesse des cap
 - **Fiabilité :** Répétition du test des dizaines de fois pour garantir la reproductibilité et la fiabilité du mécanisme.
 - **Changement de mode après impact :** Après une collision détectée par l'accéléromètre, on vérifie que les rôles "Chat" et "Souris" sont bien inversés.
 
-![Test bordures/chocs](Project_Catronic/Media/test1.jpg)
+![Test bordures/chocs](Media/test1.jpg)
 
 *Figure 9 – Détection de bordures/chocs et changement de direction.*
 
@@ -182,7 +182,7 @@ Ce test valide la perception de l'environnement et la stratégie comportementale
 - **Fiabilité de la détection d'adversaire :** Vérification que le LIDAR détecte de manière fiable la position de l'autre robot.
 - **Logique de poursuite/fuite :** Validation de la trajectoire du robot en fonction des données du LIDAR (le "Chat" se rapproche de la "Souris", et la "Souris" s'en éloigne).
 
-![Test LIDAR](Project_Catronic/Media/test_lidar.jpg)
+![Test LIDAR](Media/test_lidar.jpg)
 
 *Figure 10 – Données LIDAR capturées via Tera Term (UART DMA).* 
 
@@ -197,7 +197,7 @@ Ce test vérifie la connectivité et la fiabilité de la communication sans fil 
 - **Changement de mode à distance :** Validation de la capacité à modifier le rôle du robot (Chat/Souris) via une commande Bluetooth.
 
 
-![Test Bluetooth](Project_Catronic/Media/test2.jpg)
+![Test Bluetooth](Media/test2.jpg)
 
 *Figure 11 – Communication Bluetooth et affichage des données.*
 
