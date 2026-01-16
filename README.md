@@ -129,8 +129,6 @@ L'objectif est de valider le contrôle des moteurs et la précision des déplace
 - **Test de rotation :** Mesure de la précision des rotations (ex: 90°, 180°).
 - **Réponse du PWM :** Analyse de l'efficacité de la commande PWM pour l'accélération, la décélération et la correction de trajectoire.
 - *(Des vidéos et graphiques illustrant ces tests seront ajoutés ici.)*
-![Image du test de déplacement](Project_Catronic/Images/test1.jpg)
-*Description du comportement du robot lors des tests de déplacement.*
 
 ### Test de la détection de bordures
 Ce test est crucial pour la sécurité du robot. Il valide la robustesse des capteurs mécaniques.
@@ -138,8 +136,8 @@ Ce test est crucial pour la sécurité du robot. Il valide la robustesse des cap
 - **Approche en diagonale :** Le test est répété avec différents angles d'approche pour s'assurer que le levier du capteur est bien actionné même lorsque le robot n'est pas perpendiculaire au bord.
 - **Fiabilité :** Répétition du test des dizaines de fois pour garantir la reproductibilité et la fiabilité du mécanisme.
 - *(Des vidéos montrant le comportement du robot au bord de la table seront ajoutées ici.)*
-![Image du test de détection de bordures](Project_Catronic/Images/test2.jpg)
-*Description du comportement du robot lors des tests de détection de bordures.*
+![Image du test de détection de bordures et mode robot](Project_Catronic/Images/test1.jpg)
+*Visualisation du comportement du robot lors de la détection de bordures et de la commutation des modes "Chat"/"Souris".*
 
 ### Test du LIDAR et de la logique de jeu
 Ce test valide la perception de l'environnement et la stratégie comportementale.
@@ -148,9 +146,28 @@ Ce test valide la perception de l'environnement et la stratégie comportementale
 - **Mode Fuite (Souris) :** Le robot est configuré en mode "Souris". On vérifie qu'il s'éloigne activement du "Chat" tout en évitant les bords de la table.
 
 ![Test du LIDAR avec Tera Term](Project_Catronic/Images/test_lidar.jpg)
+
 *Capture d'écran de Tera Term montrant les données du LIDAR pour la détection d'obstacles.*
 
-- *(Des vidéos des scénarios de jeu "chat et souris" seront ajoutés ici.)*
+
+
+- *(Des vidéos des scénarios de jeu "chat et souris" seront ajoutées ici.)*
+
+
+
+### Test de communication (Bluetooth)
+
+Ce test vérifie la connectivité et la fiabilité de la communication sans fil via le module Bluetooth.
+
+- **Connexion :** Vérification de l'établissement de la connexion Bluetooth avec un appareil externe.
+
+- **Transmission de données :** Test de l'envoi et de la réception de données entre le robot et l'appareil connecté.
+
+- **Changement de mode à distance :** Validation de la capacité à modifier le rôle du robot (Chat/Souris) via une commande Bluetooth.
+
+![Image du test Bluetooth](Project_Catronic/Images/test2.jpg)
+
+*Visualisation des données échangées via Bluetooth ou du statut de connexion.*
 
 ---
 
