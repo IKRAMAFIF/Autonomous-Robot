@@ -167,7 +167,9 @@ Pour garantir la fiabilité du système, plusieurs séries de tests ont été me
 Ce test valide le contrôle PWM et met en évidence les écarts de vitesse entre les moteurs. 
 Un ajustement asymétrique des vitesses a permis d’améliorer la précision du déplacement du robot.
 
-![Test moteur](Media/test_moteur.jpg)
+<p align="center">
+  <img src="Media/test_moteur.jpg" width="400">
+</p>
 
 ### Test de détection de bordures/détection de collision
 
@@ -177,7 +179,9 @@ Ce test est crucial pour la sécurité du robot. Il valide la robustesse des cap
 - **Fiabilité :** Répétition du test des dizaines de fois pour garantir la reproductibilité et la fiabilité du mécanisme.
 - **Changement de mode après impact :** Après une collision détectée par l'accéléromètre, on vérifie que les rôles "Chat" et "Souris" sont bien inversés.
 
-![Test bordures/chocs](Media/test1.jpg)
+<p align="center">
+  <img src="Media/test1.jpg" width="400">
+</p>
 
 *Figure 9 – Détection de bordures/chocs et changement de direction.*
 
@@ -188,7 +192,10 @@ Ce test valide la perception de l'environnement et la stratégie comportementale
 - **Fiabilité de la détection d'adversaire :** Vérification que le LIDAR détecte de manière fiable la position de l'autre robot.
 - **Logique de poursuite/fuite :** Validation de la trajectoire du robot en fonction des données du LIDAR (le "Chat" se rapproche de la "Souris", et la "Souris" s'en éloigne).
 
-![Test LIDAR](Media/test_lidar.jpg)
+<p align="center">
+  <img src="Media/test_lidar.jpg" width="400">
+</p>
+
 
 *Figure 10 – Données LIDAR capturées via Tera Term (UART DMA).* 
 
@@ -202,8 +209,10 @@ Ce test vérifie la connectivité et la fiabilité de la communication sans fil 
 
 - **Changement de mode à distance :** Validation de la capacité à modifier le rôle du robot (Chat/Souris) via une commande Bluetooth.
 
+<p align="center">
+  <img src="Media/test2.jpg" width="400">
+</p>
 
-![Test Bluetooth](Media/test2.jpg)
 
 *Figure 11 – Communication Bluetooth et affichage des données.*
 
@@ -220,14 +229,11 @@ Ce test vérifie la connectivité et la fiabilité de la communication sans fil 
 ---
 ##  Test final
 
-
-![Final Robot Test](Media/final_test.gif)
+<p align="center">
+  <img src="Media/final_test.gif" width="400">
+</p>
 
 Lors du test final, le robot a validé plusieurs fonctionnalités clés. Les capteurs de bordure fonctionnent correctement, permettant au robot de détecter les limites de la surface et d’éviter toute chute. La commande via Bluetooth est également opérationnelle : il est possible de sélectionner le mode de fonctionnement du robot ainsi que d’envoyer des commandes Start et Stop pour lancer ou arrêter le système. Les données du LiDAR ont pu être lues avec succès, cependant toutes les mesures n’étaient pas fiables et l’intégration complète du capteur dans le système embarqué n’a pas pu être finalisée. En conséquence, le robot n’est pas capable de détecter les autres robots à ce stade. Enfin, l’accéléromètre permet de détecter les chocs lors d’une collision, déclenchant automatiquement un changement de mode de fonctionnement du robot.
-
-
-
-
 
 
 ---
